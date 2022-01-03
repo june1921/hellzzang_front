@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 import React, { useState } from "react";
 import image from "./images.jpg";
+import Modal from "./components/Modal/Modal";
 
 function App() {
 
@@ -11,7 +12,6 @@ function App() {
   let [스위치, 스위치변경] = useState(false);
 
   return (
-    
     <div className="App">
       <Navbar expand="lg">
         <Container>
@@ -40,15 +40,31 @@ function App() {
         <TabContent pushTab={pushTab} />
       </body>
     </div>
-    
   );
 }
 
 function TabContent(props) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+
+
   if (props.pushTab === 0) {
     return <Row xs={1} md={2} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
+
         <Col>
+          <React.Fragment>
+            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            </Modal>
+          </React.Fragment>
+          <a onClick= {openModal}>
           <Card>
             <Card.Img variant="top" src={image} />
             <Card.Body>
@@ -58,14 +74,20 @@ function TabContent(props) {
               </Card.Text>
             </Card.Body>
           </Card>
+          </a>
         </Col>
       ))}
     </Row>
+
   } else if (props.pushTab === 1) {
     return <h1>명예의 전당 들어갈곳</h1>
   } else if (props.pushTab === 2) {
     return <h1>여기에 들어갈건 아직 미정</h1>
   }
+}
+
+function ModalContent(props) {
+
 }
 
 export default App;
