@@ -3,6 +3,13 @@ import { Navbar, Container, Nav, Row, Card } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import './App.css';
 import React, { useState } from "react";
+import PostListPage from './pages/PostListPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import WritePage from './pages/WritePage';
+import PostPage from './pages/PostPage';
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+
 import image from "./images.jpg";
 
 function App() {
@@ -11,7 +18,7 @@ function App() {
   let [스위치, 스위치변경] = useState(false);
 
   return (
-    
+
     <div className="App">
       <Navbar expand="lg">
         <Container>
@@ -19,7 +26,7 @@ function App() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              사 용 자 : <a href="#login">침착맨</a>
+              사 용 자 : <a href="/login" onClick={() => { <LoginPage /> }}>침착맨</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -36,11 +43,26 @@ function App() {
           <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}>미정</Nav.Link>
         </Nav.Item>
       </Nav>
-      <body>
-        <TabContent pushTab={pushTab} />
-      </body>
+      {/* <TabContent pushTab={pushTab} /> */}
+
+      <h1>로그인 창</h1>
+      <BrowserRouter>
+
+        <Routes>
+
+          <Route element = { <PostListPage /> } path='/:username' />
+          <Route element = { <LoginPage /> } path='/login'/>
+          <Route element = { <RegisterPage /> } path='/register' />
+          <Route element = { <WritePage /> } path='/write' />
+          <Route element = { <PostPage /> } path="/:username/:postId"/>
+
+        </Routes>
+
+      </BrowserRouter>
+
+
     </div>
-    
+
   );
 }
 
@@ -48,7 +70,7 @@ function TabContent(props) {
   if (props.pushTab === 0) {
     return <Row xs={1} md={2} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
-        <Col>
+        <Col key={idx}>
           <Card>
             <Card.Img variant="top" src={image} />
             <Card.Body>
