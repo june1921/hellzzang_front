@@ -2,6 +2,27 @@
   text-align: center;
 }
 
+.body{
+  background : radial-gradient(#7c7777, #ffff, #e5e5e5);
+}
+
+.card{
+  width:20rem;
+  margin-bottom: 2em;
+}
+
+.card:hover{
+  box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important;
+}
+
+.card-body{
+  padding: 3rem 0 !important;
+}
+
+.col{
+  padding: 1px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
