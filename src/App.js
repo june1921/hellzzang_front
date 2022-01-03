@@ -43,7 +43,7 @@ function App() {
           <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}>미정</Nav.Link>
         </Nav.Item>
       </Nav>
-      {/* <TabContent pushTab={pushTab} /> */}
+      <TabContent pushTab={pushTab} />
 
       <h1>로그인 창</h1>
       <BrowserRouter>
