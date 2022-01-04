@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from "../../lib/styles/palette"
 import Button from "../common/Button";
+import axios from 'axios';
 
 // 회원가입 or 로그인 폼 보여줌
 
@@ -55,29 +56,73 @@ const AuthForm = ({ type }) => {
     return (
         <AuthFormBlock>
             <h3>{text}</h3>
-            <form>
+            <form onSubmit={(e)=>{ //회원가입 > 회원정보 DB에 저장하는 곳
+              e.preventDefault();
+              if(type ==='register'){
+                const formData = new FormData();
+                const name = e.target['0'].value;
+                const nickname = e.target['1'].value;
+                const userid = e.target['2'].value;
+                const userpw = e.target['3'].value;
+
+                formData.append("name", name);
+                formData.append("nickname", nickname);
+                formData.append("userid", userid);
+                formData.append("userpw", userpw);
+
+                console.log(name, nickname, userid, userpw);
+                axios({
+                  url: 'http://localhost:8080/user/signup',
+                  method: 'post',
+                  data: formData,
+                }).then((res) => {
+                  window.location = '/login';
+                });
+              }else if(type ==='login'){
+                const formData = new FormData();
+                const userid = e.target['0'].value;
+                const userpw = e.target['1'].value;
+                formData.append("userid", userid);
+                formData.append("userpw", userpw);
+                console.log(userid, userpw);
+                axios({
+                  url: 'http://localhost:8080/user/login',
+                  method: 'post',
+                  data: formData,
+                }).then((res) => {
+                  if (res.data.code === 200) {
+                    alert('로그인 되었습니다.');
+                    //JWT와 같은 토큰값을 저장
+                    window.sessionStorage.setItem("userid", userid);
+                    window.location = '/';
+                  } else {
+                    alert('가입 정보를 확인해 주세요');
+                  }
+                });
+              }
+              
+            }}>
                 {type === 'register' && (
                     <><StyledInput
                         autoComplete="userName"
-                        name="userName"
+                        name="name"
                         placeholder="이름"
                         type="text" />
-                        <StyledInput
-                            autoComplete="userNickname"
-                            name="userNickname"
-                            placeholder="닉네임"
-                            type="text" />
+                      <StyledInput
+                        autoComplete="userNickname"
+                        name="nickname"
+                        placeholder="닉네임"
+                        type="text" />
                     </>
                 )}
 
-
                 <StyledInput
                     autoComplete="userId"
-                    name="userId"
+                    name="userid"
                     placeholder="아이디" />
                 <StyledInput
                     autoComplete="new-password"
-                    name="password"
+                    name="userpw"
                     placeholder="비밀번호"
                     type="password" />
 
@@ -93,8 +138,8 @@ const AuthForm = ({ type }) => {
                             placeholder="이메일 주소"
                             type="email" />
                         <StyledInput
-                            autoComplete="userBirth"
-                            name="userBirth"
+                            autoComplete="new-birth"
+                            name="birth"
                             placeholder="생년월일"
                             type="date" /></>
 
@@ -104,7 +149,7 @@ const AuthForm = ({ type }) => {
                     {text}
                 </ButtonWidthMarginTop>
             </form>
-
+ 
             <Footer>
                 {type === 'login' ? (
                     <Link to="/register">회원가입</Link>

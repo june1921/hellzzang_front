@@ -2,25 +2,32 @@
   text-align: center;
 }
 
-.body{
+.navbar{
+  background : radial-gradient(#ff2727, rgb(250, 15, 15), #ff2727);
+}
 
-  background : radial-gradient(#7c7777, #ffff, #e5e5e5);
+h2{
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 45px;
+  text-shadow: 3px 3px 3px #ababab;
 }
 
 .card{
 
-  width:20rem;
-  margin-top: 8rem;
+  width:15rem;
+  margin-top: 4rem;
   margin-bottom: 2rem;
-  margin-left: 8rem;
+  margin-left: 7rem;
 }
 
 .card:hover{
   box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important;
 }
 
+
 .card-body{
-  padding: 3rem 0 !important;
+
+  padding: 2rem 0 !important;
 }
 
 .col{
@@ -46,7 +53,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(255, 251, 251);
 }
 
 .App-link {
@@ -60,4 +67,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.justify-content-end {
+  margin-top: 1rem;
+  margin-bottom: 2rem ;
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 40px;
+  text-shadow: 3px 3px 3px #ababab
+}
+
+.justify-content-end2 {
+  margin-top: 1rem;
+  margin-bottom: 2rem ;
+  margin-left: 10rem;
+  font-size: 15px;
+  
+ 
 }
