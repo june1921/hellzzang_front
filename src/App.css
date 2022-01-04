@@ -3,12 +3,16 @@
 }
 
 .body{
+
   background : radial-gradient(#7c7777, #ffff, #e5e5e5);
 }
 
 .card{
+
   width:20rem;
-  margin-bottom: 2em;
+  margin-top: 8rem;
+  margin-bottom: 2rem;
+  margin-left: 8rem;
 }
 
 .card:hover{
