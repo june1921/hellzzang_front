@@ -14,6 +14,7 @@ import Modal from "./components/Modal/Modal";
 
 
 import image from "./images.jpg";
+import axios from 'axios';
 
 function App() {
 
@@ -52,13 +53,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<TabContent pushTab={pushTab} />} path='/' />
-          {/* <Route element={<PostListPage />} path='/' /> */}
           <Route element={<LoginPage />} path="/login" />
           <Route element={<RegisterPage />} path="/register" />
           <Route element={<WritePage />} path="/write" />
           <Route element={<PostPage />} path="/:username/:postId" />
           <Route element={<MyPage />} path="/mypage" />
-
         </Routes>
       </BrowserRouter>
 
@@ -79,7 +78,7 @@ function TabContent(props) {
   };
 
   if (props.pushTab === 0) {
-    return <Row xs={1} md={2} className="g-4">
+    return <Row xs={1} md={4} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
         <Col>
           <React.Fragment>
