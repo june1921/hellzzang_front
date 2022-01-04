@@ -26,7 +26,7 @@ function App() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              사 용 자 : <a href="/mypage">침착맨</a>
+              <a href="/mypage">사용자</a> : <a href="/login">침착맨</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -42,7 +42,6 @@ function App() {
           <Nav.Link eventKey="link-1" onClick={() => { 스위치변경(false); setPushTab(1); }}>Rank</Nav.Link>
         </Nav.Item>
       </Nav>
-
 
 
 
