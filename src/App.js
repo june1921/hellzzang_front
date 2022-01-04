@@ -3,8 +3,17 @@ import { Navbar, Container, Nav, Row, Card } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import './App.css';
 import React, { useState } from "react";
+// import PostListPage from './pages/PostListPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import WritePage from './pages/WritePage';
+import PostPage from './pages/PostPage';
+import MyPage from './pages/MyPage';
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import Modal from "./components/Modal/Modal";
+
+
 import image from "./images.jpg";
-import {Link, Route} from 'react-router-dom';
 import axios from 'axios';
 
 function App() {
@@ -13,7 +22,7 @@ function App() {
   let [스위치, 스위치변경] = useState(false);
 
   return (
-    
+
     <div className="App">
       <Navbar expand="lg">
         <Container>
@@ -21,8 +30,7 @@ function App() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              
-              <button onClick={()=>{<Login/>}}>로그인</button>
+            <a href="/mypage">사용자</a> : <a href="/login" onClick={() => { <LoginPage /> }}>침착맨</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -39,19 +47,48 @@ function App() {
           <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}>미정</Nav.Link>
         </Nav.Item>
       </Nav>
-      <body>
-        <TabContent pushTab={pushTab} />
-      </body>
-    </div>
+      {/* <TabContent pushTab={pushTab} /> */}
+
     
+      <BrowserRouter>
+        <Routes>
+          <Route element={<TabContent pushTab={pushTab} />} path='/' />
+          {/* <Route element={<PostListPage />} path='/' /> */}
+          <Route element={<LoginPage />} path="/login" />
+          <Route element={<RegisterPage />} path="/register" />
+          <Route element={<WritePage />} path="/write" />
+          <Route element={<PostPage />} path="/:username/:postId" />
+          <Route element={<MyPage />} path="/mypage" />
+        </Routes>
+      </BrowserRouter>
+
+    </div>
+
   );
 }
 
 function TabContent(props) {
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   if (props.pushTab === 0) {
     return <Row xs={1} md={4} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
+
         <Col>
+          <React.Fragment>
+            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            </Modal>
+          </React.Fragment>
+          
+          <a onClick= {openModal}>
           <Card>
             <Card.Img variant="top" src={image} />
             <Card.Body>
@@ -61,6 +98,7 @@ function TabContent(props) {
               </Card.Text>
             </Card.Body>
           </Card>
+          </a>
         </Col>
       ))}
     </Row>
