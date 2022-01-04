@@ -23,6 +23,7 @@ function App() {
   return (
 
     <div className="App">
+      
       <Navbar expand="lg">
         <Container>
           <Navbar.Brand href="/">로 고</Navbar.Brand>
