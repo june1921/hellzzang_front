@@ -3,14 +3,13 @@ import './index.css';
 import App from './App';
 
 // import * as serviceWorker from './serviceWorker';
-
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './modules';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom';
+import { IsoRounded } from '@material-ui/icons';
 
 
 const store = createStore (rootReducer, composeWithDevTools());

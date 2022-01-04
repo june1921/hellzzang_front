@@ -1,6 +1,7 @@
 import React from 'react';
 import "./ModalDesign.css";
-import images from './images.jpg';
+import LikeButton from './LikeButton';
+import ReactDOM  from 'react-dom';
 
 const Modal = (props) => {
     // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -18,12 +19,18 @@ const Modal = (props) => {
                             &times;{' '}
                         </button>
                     </header>
-                    <main>{props.children}
-                        <div class="container">
-                            <div class="item"><img src={images} alt="검거" /></div>
-                            <div class="item">언더아머 단속중</div>
-                            <div class="item">좋아요</div>
+                    <main>
+                        <div class="modal-body">
+                            <div class="grid-container">
+                                <div class="item1">MainContent</div>
+                                <div class="item2">ToDoList</div>
+
+                                <div class="item3">
+                                    <LikeButton/>
+                                </div>
+                            </div>
                         </div>
+                        {props.children}
                     </main>
                     <footer>
                         <button className="close" onClick={close}>
@@ -37,4 +44,5 @@ const Modal = (props) => {
     );
 };
 
+ReactDOM.render(<LikeButton />, document.getElementById('root') )
 export default Modal;
