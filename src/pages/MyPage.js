@@ -9,8 +9,7 @@ const MyPage = () => {
       //연동시켜야함
       <Container>
        <Row>
-    <Col xs={6}>김주희님의 미션:</Col>
-     <Col>D-DAY : </Col>
+    <Col xs={6}>김주희님의 미션:</Col> 
 
   </Row>
  
