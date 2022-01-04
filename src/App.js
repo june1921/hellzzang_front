@@ -86,7 +86,6 @@ function TabContent(props) {
             <Modal open={modalOpen} close={closeModal} header="Modal heading">
             </Modal>
           </React.Fragment>
-          
           <a onClick= {openModal}>
           <Card>
             <Card.Img variant="top" src={image} />

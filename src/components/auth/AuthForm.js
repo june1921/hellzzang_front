@@ -93,8 +93,8 @@ const AuthForm = ({ type }) => {
                             placeholder="이메일 주소"
                             type="email" />
                         <StyledInput
-                            autoComplete="userBirth"
-                            name="userBirth"
+                            autoComplete="new-birth"
+                            name="birth"
                             placeholder="생년월일"
                             type="date" /></>
 
