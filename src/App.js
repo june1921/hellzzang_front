@@ -58,7 +58,6 @@ function TabContent(props) {
   if (props.pushTab === 0) {
     return <Row xs={1} md={2} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
-
         <Col>
           <React.Fragment>
             <Modal open={modalOpen} close={closeModal} header="Modal heading">

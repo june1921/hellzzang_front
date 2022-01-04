@@ -18,12 +18,16 @@ const Modal = (props) => {
                             &times;{' '}
                         </button>
                     </header>
-                    <main>{props.children}
-                        <div class="container">
-                            <div class="item"><img src={images} alt="검거" /></div>
-                            <div class="item">언더아머 단속중</div>
-                            <div class="item">좋아요</div>
+                    <main>
+                        <div class="modal-body">
+                            <div class="grid-container">
+                                <div class = "item1">MainContent</div>
+                                <div class = "item2">ToDoList</div>
+                                
+                                <div class = "item3">HeartReply</div>
+                            </div>
                         </div>
+                        {props.children}
                     </main>
                     <footer>
                         <button className="close" onClick={close}>
