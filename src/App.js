@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 import React, { useState } from "react";
 import image from "./images.jpg";
+import {Link, Route} from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
 
@@ -19,7 +21,8 @@ function App() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              사 용 자 : <a href="#login">침착맨</a>
+              
+              <button onClick={()=>{<Login/>}}>로그인</button>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -46,7 +49,7 @@ function App() {
 
 function TabContent(props) {
   if (props.pushTab === 0) {
-    return <Row xs={1} md={2} className="g-4">
+    return <Row xs={1} md={4} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
         <Col>
           <Card>
