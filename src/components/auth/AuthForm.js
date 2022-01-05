@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from "../../lib/styles/palette"
@@ -51,8 +51,13 @@ const textMap = {
     register: '회원가입',
 };
 
+
+
 const AuthForm = ({ type }) => {
     const text = textMap[type];
+
+    
+
     return (
         <AuthFormBlock>
             <h3>{text}</h3>
@@ -74,7 +79,7 @@ const AuthForm = ({ type }) => {
                 axios({
                   url: 'http://localhost:8080/user/signup',
                   method: 'post',
-                  data: formData,
+                  data: formData
                 }).then((res) => {
                   window.location = '/login';
                 });
@@ -84,7 +89,6 @@ const AuthForm = ({ type }) => {
                 const userpw = e.target['1'].value;
                 formData.append("userid", userid);
                 formData.append("userpw", userpw);
-                console.log(userid, userpw);
                 axios({
                   url: 'http://localhost:8080/user/login',
                   method: 'post',
@@ -98,9 +102,8 @@ const AuthForm = ({ type }) => {
                   } else {
                     alert('가입 정보를 확인해 주세요');
                   }
-                });
+                })
               }
-              
             }}>
                 {type === 'register' && (
                     <><StyledInput
