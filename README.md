@@ -21,3 +21,8 @@ onChangeField 함수는 useCallback으로 감싸주었는데, 이는 Editor 컴�
 이전에 작성한 내용이 남아있게 됩니다.
 
 컨테이너 컴포넌트를 다 만들었으면 WritePage에서 기존 Editor를 EditorContainer로 대체시켜 주세요.
+
+# 설치해야하는 것
+npm add quill (글 작성하는 에디터)
+npm install antd
+npm install redux-saga

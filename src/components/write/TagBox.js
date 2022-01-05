@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
@@ -77,22 +77,27 @@ const TagList = React.memo(({ tags, onRemove }) => (
     </TagListBlock>
 ));
 
-const TagBox = () => {
+const TagBox = ({ tags, onChangeTags }) => {
     const [input, setInput] = useState("");
     const [localTags, setLocalTags] = useState([]);
 
     const insertTag = useCallback (
         tag => {
             if (!tag) return; // 공백이면 추가X
-            if (localTags.includes(tag)) return; // 이미 존재하면 추가x
+            if (localTags.includes(tag)) return; //겹치는 태그면 추가x
+            const nextTags = [...localTags, tag];
+            setLocalTags(nextTags);
+            onChangeTags(nextTags);
             setLocalTags([...localTags, tag]);
-        }, [localTags],
+        }, [localTags, onChangeTags]
     );
 
     const onRemove = useCallback (
         tag => {
+            const nextTags = localTags.filter(t => t !== tag);
             setLocalTags (localTags.filter(t => t !== tag));
-        }, [localTags]
+            onChangeTags(nextTags);
+        }, [localTags, onChangeTags]
     );
 
     const onChange = useCallback (
@@ -100,15 +105,20 @@ const TagBox = () => {
             setInput (e.target.value);
         }, []
     );
-    
-    const onSubmit = useCallback (
+
+    const onSubmit = useCallback(
         e => {
             e.preventDefault();
             insertTag(input.trim()); //앞뒤 추가 공백 없앤 후 등록
-            setInput (''); //input 초기화
+            setInput(''); //input 초기화
         }, [input, insertTag]
     );
-    
+
+    //tags 값이 바뀌는 경우
+    useEffect(() => {
+        setLocalTags(tags);
+    }, [tags]);
+
     return (
         <TagBoxBlock>
             <h4>태그</h4>
@@ -117,6 +127,7 @@ const TagBox = () => {
                 place holder = "태그를 입력하세요" 
                 value = {input}
                 onChange = {onChange} />
+                
                 <button type = "submit">추가</button>
             </TagForm>
             <TagList tags = {localTags} onRemove = {onRemove} />
