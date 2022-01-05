@@ -2,7 +2,7 @@
 import { Navbar, Container, Nav, Row, Card, Button } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import './App.css';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 // import PostListPage from './pages/PostListPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -24,6 +24,7 @@ function App() {
 
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
+  let [sessionid, setsessionid] = useState([]);
 
   //window.sessionStorage.removeItem('userid');
   //window.sessionStorage.removeItem('nickname');
@@ -60,11 +61,29 @@ function App() {
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
-            {/* 디데이 기능 필요 */}
-            <Navbar.Text>
+            <Navbar.Text> 
+              {/* 가져오기버튼누르면 디데이 활성화 */}
+              <form onSubmit={(e)=>{
+                e.preventDefault();
+                axios({
+                  url:'http://localhost:8080/mission',
+                  method : 'get',
+                  params : {userid:window.sessionStorage.getItem("userid")}
+                }).then((res)=>{setsessionid(res.data);})
+                let last = new Date(sessionid['0'].last_day)
+                let now = new Date(); 
+                const diday = Math.ceil((last - now)/1000/60/60/24);
+                window.sessionStorage.setItem("diday", diday);
 
-
-              <a href="/mypage">D -  </a>  30
+                console.log(window.sessionStorage.getItem("userid"));
+                console.log(last);
+                console.log(now);
+                console.log(diday);
+                console.log(window.sessionStorage.getItem("diday"));
+                }}> 
+                <button type="submit">Day가져오기</button>
+              </form>
+              <h2>D{window.sessionStorage.getItem("diday")}</h2>
             </Navbar.Text>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end2">

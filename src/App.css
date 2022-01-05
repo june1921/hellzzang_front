@@ -6,8 +6,7 @@
   background : radial-gradient(#ff2727, rgb(250, 15, 15), #ff2727);
 }
 
-.h1{
-  font-family: Copperplate, Papyrus, fantasy;
+h2{
   font-size: 45px;
   text-shadow: 3px 3px 3px #ababab;
 }
@@ -71,7 +70,6 @@
 .justify-content-end {
   margin-top: 1rem;
   margin-bottom: 2rem ;
-  font-family: Copperplate, Papyrus, fantasy;
   font-size: 40px;
   text-shadow: 3px 3px 3px #ababab
 }
