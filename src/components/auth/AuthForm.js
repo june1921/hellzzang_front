@@ -93,7 +93,7 @@ const AuthForm = ({ type }) => {
                   if (res.data.code === 200) {
                     alert('로그인 되었습니다.');
                     //JWT와 같은 토큰값을 저장
-                    window.sessionStorage.setItem("userid", userid);
+                    sessionStorage.setItem("userid", userid);
                     window.location = '/';
                   } else {
                     alert('가입 정보를 확인해 주세요');

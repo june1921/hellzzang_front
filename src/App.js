@@ -11,6 +11,7 @@ import PostPage from './pages/PostPage';
 import MyPage from './pages/MyPage';
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Modal from "./components/Modal/Modal";
+import AuthCheck from "./modules/AuthCheck";
 
 import image from "./images.jpg";
 import axios from 'axios';
@@ -18,60 +19,63 @@ import axios from 'axios';
 function App() {
 
   const [isLogin, setIsLogin] = useState(false)
-
+  const [nickname] = useState(0)
+  const backTotheHome = () => <Redirect to="/" />;
 
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
 
+  //window.sessionStorage.removeItem('userid');
+  //window.sessionStorage.removeItem('nickname');
+  
   useEffect(() => {
     if (sessionStorage.getItem('userid') === null) {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
       console.log('isLogin ?? :: ', isLogin)
-    } else {
+    }
+    else {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
       // 로그인 상태 변경
       setIsLogin(true)
       console.log('isLogin ?? :: ', isLogin)
-
       axios({
         method: "get",
-        url: "http://localhost:8080/user/signup",
-        responseType: "type"
-    }).then(function (response) {
+        url: "http://localhost:8080/user/output",
+        params: { userid: window.sessionStorage.getItem("userid") },
+      }).then(function (response) {
         // response Action
-        console.log(response);
-    });
-
-      console.log(window.sessionStorage.getItem('userid'))
+        window.sessionStorage.setItem("nickname", response.data['0'].nickname);
+      });
     }
   })
-  return (
 
+  return (
     <div className="App">
       <Navbar expand="lg">
 
         <Container>
           <Navbar.Brand href="/">
-            <h2>HELL ZZANG</h2>
-            </Navbar.Brand>
+            <h1 className="h1">HELL ZZANG</h1>
+          </Navbar.Brand>
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
             {/* 디데이 기능 필요 */}
             <Navbar.Text>
 
-              
-              <a href="/mypage">D -  </a>  30 
+
+              <a href="/mypage">D -  </a>  30
             </Navbar.Text>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end2">
 
             <Navbar.Text>
-             
-              <a href="/mypage">사용자</a> : <a href="/login" onClick={() => { <LoginPage /> }}>
-                로그인하세요!{window.sessionStorage.getItem('nickname')}
-              </a>
+              <a href="/mypage">나의페이지</a>
 
+              {(window.sessionStorage.getItem("nickname") === null) ? <div>
+                <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
+                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다. </div>
+              }
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -87,7 +91,7 @@ function App() {
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
 
-
+    
       <BrowserRouter>
         <Routes>
           <Route element={<TabContent pushTab={pushTab} />} path='/' />
@@ -102,18 +106,6 @@ function App() {
     </div>
 
   );
-}
-
-function findContentById() {
-  // 선택된 요소(html, css, js)의 id에 해당하는 객체 찾기
-  let content;
-  for (let i = 0; i < this.state.contents.length; i++) {
-    if (this.state.id == this.state.contents[i].id) {
-      content = this.state.contents[i];
-      break;
-    }
-  }
-  return content;
 }
 
 function TabContent(props) {
@@ -149,7 +141,7 @@ function TabContent(props) {
         </Col>
       ))}
     </Row>
-    console.log()
+
   } else if (props.pushTab === 1) {
     return <h1>명예의 전당 들어갈곳</h1>
   } else if (props.pushTab === 2) {
@@ -173,14 +165,9 @@ function TabContent(props) {
             </Card.Body>
 
           </Card>
-
         </Col>
       ))}
     </Row>
-
-
-
-
   }
 }
 
