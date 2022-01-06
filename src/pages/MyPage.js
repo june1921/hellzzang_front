@@ -1,15 +1,29 @@
 //import React, {Component, component } from "react";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import image2 from "./다이어트.jpg";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import axios from "axios";
 
 const MyPage = () => {
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:8080/dailycard/list',
+      method: 'get'
+    }).then((res) => {
+      setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
+    });
+  }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
+
+
     return  (
       //연동시켜야함
       <Container>
        <Row>
-    <Col xs={6}>김주희님의 미션:</Col> 
+    <Col xs={6}>김주희님의 미션:   <button onClick={()=>{}}>미션추가</button></Col> 
 
   </Row>
  
@@ -29,12 +43,6 @@ const MyPage = () => {
         </Col>
       ))}
     </Row>
-
-    
-
-      
-       
-   
   </Container>
     )
 }

@@ -48,7 +48,6 @@ const Editor = ({title, body, onChangeField}) => {
             theme: 'bubble',
             placeholder: '내용을 작성하세요.',
             modules: {
-                // 더많은 옵션: http://quilljs.com/docs/modules/toolbar/ 참고
                 toolbar: [
                     [{ header: '1' }, { header: '2' }],
                     ['bold', 'italic', 'underline', 'strike'],
@@ -58,8 +57,6 @@ const Editor = ({title, body, onChangeField}) => {
             },
         });
 
-        //quill에 text-change 이벤트 핸들러 등록
-        //참고: https://quillhs.com/docs/api/#events
         const quill = quillInstance.current;
         quill.on('text-change', (delta, oldDelta, source) => {
             if (source === 'user') {
@@ -74,14 +71,36 @@ const Editor = ({title, body, onChangeField}) => {
 
     return (
         <EditorBlock>
+          <form onSubmit={(e)=>{
+            e.preventDefault();
+            let title = e.target['0'].value
+            let daily_content = e.target['1'].value
+            let daily_content1 = e.target['2'].value
+            let daily_content2 = e.target['3'].value
+            let daily_content3 = e.target['4'].value
+            let daily_content4 = e.target['5'].value
+            let daily_content5 = e.target['6'].value
+
+            console.log(title);
+            console.log(daily_content);
+            console.log(daily_content1);
+            console.log(daily_content2);
+            console.log(daily_content3);
+            console.log(daily_content4);
+            console.log(daily_content5);
+            console.log("온서브밋");
+          }}>
             <TitledInput
                 placeholder="제목을 입력하세요"
                 onChange={onChangeTitle}
                 value={title}
             />
-            <QuillWrapper>
+            <QuillWrapper
+            value={body}>
                 <div ref={quillElement} />
             </QuillWrapper>
+            <button>테스트버튼</button>
+          </form>
         </EditorBlock>
     );
 };
