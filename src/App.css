@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  /* background-color: #282c34; */
 }
 
 .navbar{
@@ -121,9 +121,9 @@ h4{
   margin-bottom: 2rem ;
 }
 
-.g-4{
+/* .g-4{
   background-color: #282c34;
-}
+} */
 
 .page-footer{
   background-color: #DCDCDC;

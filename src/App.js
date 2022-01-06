@@ -4,10 +4,10 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 import React, { useState, useEffect, useReducer } from "react";
 // import PostListPage from './pages/PostListPage';
-import LoginPage from './pages/LoginPage';
 import PostPage from './pages/PostPage';
 
 import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 import WritePage from './pages/WritePage';
 import MyPage from './pages/MyPage';
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import PrivateRouter from "./modules/PrivateRouter";
 import image from "./images.jpg";
 import axios from 'axios';
 
+import NavBarPage from './pages/NavBarPage';
 
 
 
@@ -29,7 +30,6 @@ function App() {
 
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
-  let [sessionid, setsessionid] = useState([]);
 
   //window.sessionStorage.removeItem('userid');
   //window.sessionStorage.removeItem('nickname');
@@ -58,53 +58,8 @@ function App() {
   })
   return (
     <div className="App">
-      <Navbar expand="lg">
 
-        <Container>
-          <Navbar.Brand href="/">
-            <h1 className="h1">HELL ZZANG</h1>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text> 
-              {/* 가져오기버튼누르면 디데이 활성화 */}
-              <form onSubmit={(e)=>{
-                e.preventDefault();
-                axios({
-                  url:'http://localhost:8080/mission',
-                  method : 'get',
-                  params : {userid:window.sessionStorage.getItem("userid")}
-                }).then((res)=>{setsessionid(res.data);})
-                let last = new Date(sessionid['0'].last_day)
-                let now = new Date(); 
-                const diday = Math.ceil((last - now)/1000/60/60/24);
-                window.sessionStorage.setItem("diday", diday);
-
-                console.log(window.sessionStorage.getItem("userid"));
-                console.log(last);
-                console.log(now);
-                console.log(diday);
-                console.log(window.sessionStorage.getItem("diday"));
-                }}> 
-                <button type="submit">Day가져오기</button>
-              </form>
-              <h2>D{window.sessionStorage.getItem("diday")}</h2>
-            </Navbar.Text>
-          </Navbar.Collapse>
-          <Navbar.Collapse className="justify-content-end2">
-
-            <Navbar.Text>
-              <a href="/mypage">나의페이지</a>
-
-              {(window.sessionStorage.getItem("nickname") === null) ? <div>
-                <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
-                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다. </div>
-              }
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <NavBarPage />
 
       <Nav variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>

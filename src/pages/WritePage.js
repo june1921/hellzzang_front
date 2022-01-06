@@ -11,14 +11,20 @@
 //             <TagBoxContainer />
 //             <WriteActionButtonsContainer />
 //         </Responsive>
-//     );
+//     ); }
 
+//  export default WritePage;
 
 import { FloatingLabel, InputGroup } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
+import Responsive from '../components/common/Responsive';
+import TagBoxContainer from '../containers/write/TagBoxContainer';
+import TagBox from '../components/write/TagBox';
+
 
 const WritePage = () => {
   return (
@@ -50,6 +56,8 @@ const WritePage = () => {
           <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" name='name'/>
         </InputGroup>
         <br/>
+
+        
         <FloatingLabel controlId="floatingTextarea2" label="Content">
           <Form.Control
             as="textarea"
@@ -58,10 +66,15 @@ const WritePage = () => {
             style={{ height: '100px' }}
           />
         </FloatingLabel>
+
+
         <br/> 
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Control type="file" />
         </Form.Group>
+
+        <TagBoxContainer /> 
+
         <div>
           <Button type = "submit" variant="primary" size="lg" active onClick={
             ()=>{window.location="/mypage";}}>
