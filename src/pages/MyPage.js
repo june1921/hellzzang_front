@@ -20,7 +20,30 @@ const MyPage = () => {
 
 
   return (
-    <>
+<>
+  <InputGroup className="mb-3">
+    <InputGroup.Text id="inputGroup-sizing-default">My MISSON</InputGroup.Text>
+    <FormControl
+      aria-label="Default"
+      aria-describedby="inputGroup-sizing-default"
+    />
+      <Button variant="dark">SAVE</Button>{' '}
+  </InputGroup>
+  <br />
+  <InputGroup className="mb-3">
+    <InputGroup.Text id="inputGroup-sizing-default">D-DAY</InputGroup.Text>
+    <FormControl
+      aria-label="Default"
+      aria-describedby="inputGroup-sizing-default"
+      type="date" 
+    />
+      <Button variant="dark">SAVE</Button>{' '}
+  </InputGroup>
+
+  <Button href="/write" variant="dark">포스팅하기</Button>{' '}
+
+
+
       <Container>
         <Row xs={1} md={2} className="g-4">
           {list.map((v) => (

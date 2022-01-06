@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import palette from "../../lib/styles/palette"
 import Button from "../common/Button";
 import axios from 'axios';
+import '../../pages/Page.css';
 
 // 회원가입 or 로그인 폼 보여줌
 
@@ -59,8 +60,9 @@ const AuthForm = ({ type }) => {
     
 
     return (
+        <div className='logRegText'>
         <AuthFormBlock>
-            <h3>{text}</h3>
+            {/* <h3>{text}</h3> */}
             <form onSubmit={(e)=>{ //회원가입 > 회원정보 DB에 저장하는 곳
               e.preventDefault();
               if(type ==='register'){
@@ -164,6 +166,7 @@ const AuthForm = ({ type }) => {
             </Footer>
 
         </AuthFormBlock>
+        </div>
     );
 };
 
