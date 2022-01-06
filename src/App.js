@@ -11,9 +11,14 @@ import PostPage from './pages/PostPage';
 import MyPage from './pages/MyPage';
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import Modal from "./components/Modal/Modal";
+import FooterPage from "./FooterPage";
+
 import PrivateRouter from "./modules/PrivateRouter";
 import image from "./images.jpg";
 import axios from 'axios';
+
+
+
 
 function App() {
 
@@ -49,7 +54,6 @@ function App() {
       });
     }
   })
-
   return (
     <div className="App">
       <Navbar expand="lg">
@@ -109,10 +113,10 @@ function App() {
 
       <Nav variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>
-          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}>메인</Nav.Link>
+          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}><h4>MAIN</h4></Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}>명전</Nav.Link>
+          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}><h4>BEST</h4></Nav.Link>
         </Nav.Item>
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
@@ -128,8 +132,9 @@ function App() {
           <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage"/>
         </Routes>
       </BrowserRouter>
-
+     <FooterPage/>
     </div>
+    
 
   );
 }
@@ -147,7 +152,7 @@ function TabContent(props) {
 
   if (props.pushTab === 0) {
     return <Row xs={1} md={4} className="g-4">
-      {Array.from({ length: 6 }).map((_, idx) => (
+      {Array.from({ length: 8 }).map((_, idx) => (
         <Col>
           <React.Fragment>
             <Modal open={modalOpen} close={closeModal} header="Modal heading">
@@ -195,6 +200,8 @@ function TabContent(props) {
       ))}
     </Row>
   }
+
+  
 }
 
 
