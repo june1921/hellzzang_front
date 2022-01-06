@@ -6,7 +6,6 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 
 const MyPage = () => {
-
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -15,36 +14,32 @@ const MyPage = () => {
       method: 'get'
     }).then((res) => {
       setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
+      console.log(list);
     });
   }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
 
 
-    return  (
-      //연동시켜야함
+  return (
+    <>
       <Container>
-       <Row>
-    <Col xs={6}>김주희님의 미션:   <button onClick={()=>{}}>미션추가</button></Col> 
-
-  </Row>
- 
-
-  <Row xs={1} md={2} className="g-4">
-      {Array.from({ length: 10}).map((_, idx) => (
-        <Col>
-          <Card>
-            <Card.Img variant="top" src={image2} />
-            <Card.Body>
-              <Card.Title>카드 제목</Card.Title>
-              <Card.Text>
-                여기는 카드의 내용이 들어갈 부분이라고 생각이 드는곳임
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
-  </Container>
-    )
+        <Row xs={1} md={2} className="g-4">
+          {list.map((v) => (
+            <Col>
+              <Card>
+                <Card.Img variant="top" src={image2} />
+                <Card.Body>
+                  <Card.Title>{v.daily_name}</Card.Title>
+                  <Card.Text>
+                    {v.daily_content}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </>
+  )
 }
 
 
