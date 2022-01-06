@@ -25,8 +25,7 @@ function App() {
   let [스위치, 스위치변경] = useState(false);
   let [sessionid, setsessionid] = useState([]);
 
-  //window.sessionStorage.removeItem('userid');
-  //window.sessionStorage.removeItem('nickname');
+ 
   
   useEffect(() => {
     if (sessionStorage.getItem('userid') === null) {
@@ -94,8 +93,15 @@ function App() {
 
               {(window.sessionStorage.getItem("nickname") === null) ? <div>
                 <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
-                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다. </div>
+                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div> }
+
+              {(window.sessionStorage.getItem("nickname") === null) ? ""
+                : <div><a href="/" onClick={() => { alert('로그아웃 되었습니다.')
+                window.sessionStorage.removeItem('userid')
+                window.sessionStorage.removeItem('nickname')
+                }}>로그아웃</a></div>
               }
+
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
