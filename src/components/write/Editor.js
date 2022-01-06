@@ -95,7 +95,8 @@ const Editor = ({title, body, onChangeField}) => {
                 onChange={onChangeTitle}
                 value={title}
             />
-            <QuillWrapper>
+            <QuillWrapper
+            value={body}>
                 <div ref={quillElement} />
             </QuillWrapper>
             <button>테스트버튼</button>
