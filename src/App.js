@@ -79,12 +79,6 @@ function App() {
                 let now = new Date(); 
                 const diday = Math.ceil((last - now)/1000/60/60/24);
                 window.sessionStorage.setItem("diday", diday);
-
-                console.log(window.sessionStorage.getItem("userid"));
-                console.log(last);
-                console.log(now);
-                console.log(diday);
-                console.log(window.sessionStorage.getItem("diday"));
                 }}> 
                 <button type="submit">Day가져오기</button>
               </form>
@@ -134,7 +128,27 @@ function App() {
   );
 }
 
+
+
+
+
+
+
+
 function TabContent(props) {
+
+    const [list, setList] = useState([]);
+    useEffect(() => {
+      axios({
+        url: 'http://localhost:8080/dailycard/list',
+        method: 'get'
+      }).then((res) => {
+        setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
+        console.log(list);
+      });
+    }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
+  
+
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -147,7 +161,7 @@ function TabContent(props) {
 
   if (props.pushTab === 0) {
     return <Row xs={1} md={4} className="g-4">
-      {Array.from({ length: 8 }).map((_, idx) => (
+      {list.map((v) => (
         <Col>
           <React.Fragment>
             <Modal open={modalOpen} close={closeModal} header="Modal heading">
@@ -157,10 +171,8 @@ function TabContent(props) {
             <Card>
               <Card.Img variant="top" src={image} />
               <Card.Body>
-                <Card.Title>카드 제목</Card.Title>
-                <Card.Text>
-                  여기는 카드의 내용이 들어갈 부분이라고 생각이 드는곳임
-                </Card.Text>
+                <Card.Title>{v.daily_name}</Card.Title>
+                <Card.Text>{v.daily_content}</Card.Text>
               </Card.Body>
             </Card>
           </a>
