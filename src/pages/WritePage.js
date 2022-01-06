@@ -4,6 +4,8 @@ import { FormControl } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import TagBox from '../components/write/TagBox';
+
 
 const WritePage = () => {
   return (
@@ -47,6 +49,7 @@ const WritePage = () => {
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Control type="file" />
         </Form.Group>
+        <TagBox/>
         <div>
           <Button type = "submit" variant="primary" size="lg" active onClick={
             ()=>{window.location="/mypage";}}>
