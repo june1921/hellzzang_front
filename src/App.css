@@ -1,21 +1,59 @@
 .App {
   text-align: center;
+  background-color: #144D75;
 }
 
 .navbar{
-  background : radial-gradient(#ff2727, rgb(250, 15, 15), #ff2727);
+  background-color: #144D75;
 }
 
 h2{
+  
   font-size: 45px;
   text-shadow: 3px 3px 3px #ababab;
 }
+
+h1{
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 70px;
+  color: white;
+  
+}
+
+h3{
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+  color: ivory;
+  margin-left: 10rem;
+  
+}
+
+h5{
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+  
+}
+
+h6{
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 15px;
+ 
+  
+}
+
+h4{
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 20px;
+  color: white;
+  
+}
+
 
 .card{
   width:15rem;
   margin-top: 4rem;
   margin-bottom: 2rem;
-  margin-left: 7rem;
+  margin-left: 3rem;
 }
 
 .card:hover{
@@ -43,8 +81,8 @@ h2{
   }
 }
 
-.App-header {
-  background-color: #282c34;
+/* .App-header {
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -52,7 +90,7 @@ h2{
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: rgb(255, 251, 251);
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -79,6 +117,22 @@ h2{
   margin-bottom: 2rem ;
   margin-left: 10rem;
   font-size: 15px;
-  
- 
+}
+
+.mb-3{
+  margin-top: 1rem;
+  margin-bottom: 2rem ;
+}
+
+.nav{
+  background-color: #144D75;
+  margin-bottom: 2rem ;
+}
+
+.g-4{
+  background-color: #144D75;
+}
+
+.page-footer{
+  background-color: #DCDCDC;
 }

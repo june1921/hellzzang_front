@@ -1,8 +1,8 @@
-//import React, {Component, component } from "react";
-
+import { Button, Card, Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Modal from "../components/Modal/Modal";
 import React, { useEffect, useState } from "react";
 import image2 from "./다이어트.jpg";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 
 const MyPage = () => {

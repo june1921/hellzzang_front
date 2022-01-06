@@ -17,13 +17,13 @@ height: 2.215rem;
 }
 `;
 
-const WriteActionButtons = ({ onCancel, onPublish }) => {
+const WriteActionButtons = ({ onCancel, onPublish, isEdit }) => {
     return (
         <WriteActionButtonBlock>
             <StyledButton cyan onClick = {onPublish}>
-                포스트 등록
+                포스트 {isEdit ? '수정' : '등록'}
             </StyledButton>
-            <StyledButton onClick = {onCancel}>
+            <StyledButton onClick = {onCancel} >
                 취소
             </StyledButton>
         </WriteActionButtonBlock>

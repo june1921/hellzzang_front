@@ -9,18 +9,22 @@ import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
 import MyPage from './pages/MyPage';
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import Modal from "./components/Modal/Modal";
-import AuthCheck from "./modules/AuthCheck";
+import FooterPage from "./FooterPage";
 
+import PrivateRouter from "./modules/PrivateRouter";
 import image from "./images.jpg";
 import axios from 'axios';
+
+
+
 
 function App() {
 
   const [isLogin, setIsLogin] = useState(false)
   const [nickname] = useState(0)
-  const backTotheHome = () => <Redirect to="/" />;
+  const backTotheLogin = () => <Navigate to="/login" />;
 
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
@@ -33,6 +37,7 @@ function App() {
     if (sessionStorage.getItem('userid') === null) {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
       console.log('isLogin ?? :: ', isLogin)
+      console.log(window.sessionStorage.getItem("userid"));
     }
     else {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
@@ -46,10 +51,10 @@ function App() {
       }).then(function (response) {
         // response Action
         window.sessionStorage.setItem("nickname", response.data['0'].nickname);
+        console.log(window.sessionStorage.getItem("userid"));
       });
     }
   })
-
   return (
     <div className="App">
       <Navbar expand="lg">
@@ -89,6 +94,7 @@ function App() {
                 <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
                 : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다. </div>
               }
+              
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -96,10 +102,10 @@ function App() {
 
       <Nav variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>
-          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}>메인</Nav.Link>
+          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}><h4>MAIN</h4></Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}>명전</Nav.Link>
+          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}><h4>BEST</h4></Nav.Link>
         </Nav.Item>
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
@@ -107,16 +113,17 @@ function App() {
     
       <BrowserRouter>
         <Routes>
-          <Route element={<TabContent pushTab={pushTab} />} path='/' />
+          <Route element={< TabContent pushTab={pushTab} />} path='/' />
           <Route element={<LoginPage />} path="/login" />
           <Route element={<RegisterPage />} path="/register" />
           <Route element={<WritePage />} path="/write" />
           <Route element={<PostPage />} path="/:username/:postId" />
-          <Route element={<MyPage />} path="/mypage" />
+          <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage"/>
         </Routes>
       </BrowserRouter>
-
+     <FooterPage/>
     </div>
+    
 
   );
 }
@@ -200,6 +207,8 @@ function TabContent(props) {
       ))}
     </Row>
   }
+
+  
 }
 
 
