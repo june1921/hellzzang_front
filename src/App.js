@@ -91,9 +91,9 @@ function App() {
                 let now = new Date();
                 const diday = Math.ceil((last - now) / 1000 / 60 / 60 / 24);
                 window.sessionStorage.setItem("diday", diday);
-              }}>
+                }}> 
 
-
+                
                 <button type="submit">Day가져오기</button>
               </form>
               <div className="dDayText">D - {window.sessionStorage.getItem("diday")}</div>
@@ -139,7 +139,6 @@ function App() {
         </Nav.Item>
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
-
 
 
       <BrowserRouter>
