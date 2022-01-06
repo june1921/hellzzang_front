@@ -74,14 +74,37 @@ const Editor = ({title, body, onChangeField}) => {
 
     return (
         <EditorBlock>
+
+            <form onSubmit={(e) => { //회원가입 > 회원정보 DB에 저장하는 곳
+                e.preventDefault();
+                const formData = new FormData();
+
+                const title = e.target['0'].value;
+                const body = e.target['1'].value;
+                const body1 = e.target['2'].value;
+                const body2 = e.target['3'].value;
+                formData.append("title", title);
+                formData.append("body", body);
+                formData.append("body1", body1);
+                formData.append("body2", body2);
+                console.log(title, body, body1, body2);
+
+            }}>
+                <button>테스트버튼</button>
+
+            
+
+            
             <TitledInput
                 placeholder="제목을 입력하세요"
                 onChange={onChangeTitle}
                 value={title}
             />
-            <QuillWrapper>
+            <QuillWrapper
+            value={body}>
                 <div ref={quillElement} />
             </QuillWrapper>
+            </form>
         </EditorBlock>
     );
 };
