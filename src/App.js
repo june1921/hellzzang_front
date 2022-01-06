@@ -24,14 +24,17 @@ function App() {
 
   const [isLogin, setIsLogin] = useState(false)
   const [nickname] = useState(0)
+
+  const [head, setHead] = useState([]);
   const backTotheLogin = () => <Navigate to="/login" />;
 
+  let [title] = useState([]);
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
   let [sessionid, setsessionid] = useState([]);
 
- 
-  
+
+
   useEffect(() => {
     if (sessionStorage.getItem('userid') === null) {
       // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
@@ -53,7 +56,16 @@ function App() {
         console.log(window.sessionStorage.getItem("userid"));
       });
     }
-  })
+  }, []);
+
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:8080/dailycard/1',
+      method: 'get',
+    }).then(res => { setHead(res.data['0'].daily_name); })
+    console.log(head);
+  }, []);
+
   return (
     <div className="App">
       <Navbar expand="lg">
@@ -65,18 +77,18 @@ function App() {
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text> 
+            <Navbar.Text>
               {/* 가져오기버튼누르면 디데이 활성화 */}
-              <form onSubmit={(e)=>{
+              <form onSubmit={(e) => {
                 e.preventDefault();
                 axios({
-                  url:'http://localhost:8080/mission',
-                  method : 'get',
-                  params : {userid:window.sessionStorage.getItem("userid")}
-                }).then((res)=>{setsessionid(res.data);})
+                  url: 'http://localhost:8080/mission',
+                  method: 'get',
+                  params: { userid: window.sessionStorage.getItem("userid") }
+                }).then((res) => { setsessionid(res.data); })
                 let last = new Date(sessionid['0'].last_day)
-                let now = new Date(); 
-                const diday = Math.ceil((last - now)/1000/60/60/24);
+                let now = new Date();
+                const diday = Math.ceil((last - now) / 1000 / 60 / 60 / 24);
                 window.sessionStorage.setItem("diday", diday);
 
                 console.log(window.sessionStorage.getItem("userid"));
@@ -84,7 +96,7 @@ function App() {
                 console.log(now);
                 console.log(diday);
                 console.log(window.sessionStorage.getItem("diday"));
-                }}> 
+              }}>
                 <button type="submit">Day가져오기</button>
               </form>
               <h2>D{window.sessionStorage.getItem("diday")}</h2>
@@ -97,12 +109,13 @@ function App() {
 
               {(window.sessionStorage.getItem("nickname") === null) ? <div>
                 <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
-                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div> }
+                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
 
               {(window.sessionStorage.getItem("nickname") === null) ? ""
-                : <div><a href="/" onClick={() => { alert('로그아웃 되었습니다.')
-                window.sessionStorage.removeItem('userid')
-                window.sessionStorage.removeItem('nickname')
+                : <div><a href="/" onClick={() => {
+                  alert('로그아웃 되었습니다.')
+                  window.sessionStorage.removeItem('userid')
+                  window.sessionStorage.removeItem('nickname')
                 }}>로그아웃</a></div>
               }
 
@@ -121,7 +134,7 @@ function App() {
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
 
-    
+
       <BrowserRouter>
         <Routes>
           <Route element={< TabContent pushTab={pushTab} />} path='/' />
@@ -129,12 +142,12 @@ function App() {
           <Route element={<RegisterPage />} path="/register" />
           <Route element={<WritePage />} path="/write" />
           <Route element={<PostPage />} path="/:username/:postId" />
-          <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage"/>
+          <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage" />
         </Routes>
       </BrowserRouter>
-     <FooterPage/>
+      <FooterPage />
     </div>
-    
+
 
   );
 }
@@ -155,7 +168,7 @@ function TabContent(props) {
       {Array.from({ length: 8 }).map((_, idx) => (
         <Col>
           <React.Fragment>
-            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            <Modal open={modalOpen} close={closeModal} title>
             </Modal>
           </React.Fragment>
           <a onClick={openModal}>
@@ -200,10 +213,6 @@ function TabContent(props) {
       ))}
     </Row>
   }
-
-  
 }
-
-
 
 export default App;
