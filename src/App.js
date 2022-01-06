@@ -100,6 +100,7 @@ function App() {
                 <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
                 : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다. </div>
               }
+              
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
