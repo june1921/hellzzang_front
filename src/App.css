@@ -69,7 +69,9 @@ h4{
 .col{
   padding: 1px;
 }
-
+.nav-link.active{
+  background-color: cyan;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
