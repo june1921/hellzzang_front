@@ -141,7 +141,9 @@ const AuthForm = ({ type }) => {
                             autoComplete="new-birth"
                             name="birth"
                             placeholder="생년월일"
-                            type="date" /></>
+                             type="date" 
+                            />
+                            </>
 
                 )}
 
