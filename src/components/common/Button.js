@@ -10,11 +10,11 @@ border-radius: 4px;
 font-size: 1rem;
 font-weight: bold;
 padding: 0.25rem 1rem;
-color: white;
+color: ${palette.gray[5]};
 outline: none;
-cursor: pointer;
+cursor: not-alloewed;
 
-background: ${palette.gray[8]};
+background: ${palette.gray[3]};
 &:hover {
     background: ${palette.gray[6]};
 }

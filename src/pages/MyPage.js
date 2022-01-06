@@ -20,6 +20,7 @@ const MyPage = () => {
           <Card>
             <Card.Img variant="top" src={image2} />
             <Card.Body>
+              
               <Card.Title>카드 제목</Card.Title>
               <Card.Text>
                 여기는 카드의 내용이 들어갈 부분이라고 생각이 드는곳임

@@ -26,3 +26,13 @@ onChangeField 함수는 useCallback으로 감싸주었는데, 이는 Editor 컴�
 npm add quill (글 작성하는 에디터)
 npm install antd
 npm install redux-saga
+
+npm install qs 
+=> API를 사용할 때 파라미터로 문자열들을 받아 와서 직접 조합해도 되지만, 여기서는 qs 라이브러리를 사용하여 쿼리 값을
+생성하겠습니다. 이 라이브러리를 사용하면 쿼리 값을 더 편리하게 생성하고 JSON으로 변환 할 수 있습니다.
+
+npm install sanitize-html
+=> sanitize-html이라는 라이브러리를 사용하여 HTML을 필터링해 보겠습니다. 이 라이브러리는 HTML을 작성하고 보여 주어야 하는 서비스에서 매우 유용합니다. 단순히 HTML을 제거하는 기능 뿐만 아니라 특정 HTML만 허용하는 기능도 있기 때문에 글쓰기 API에서 사용하면 손쉽게악성 스크립트 삽입을 막을 수 있습니다.
+
+npm i redux-actions
+npm i redux-saga-effects
