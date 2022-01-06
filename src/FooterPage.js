@@ -16,7 +16,7 @@ export class FooterPage extends React.Component {
                         </Col>
                         <hr className="clearfix w-100 d-md-none" />
                         <Col md="2">
-                            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">Links</h5>
+                            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">헬짱소개</h5>
                             <ul className="list-unstyled">
                                 <li><a href="#!">Link 1</a></li>
                                 <li><a href="#!">Link 2</a></li>
@@ -26,7 +26,7 @@ export class FooterPage extends React.Component {
                         </Col>
                         <hr className="clearfix w-100 d-md-none" />
                         <Col md="2">
-                            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">Links</h5>
+                        <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">이용약관</h5>
                             <ul className="list-unstyled">
                                 <li><a href="#!">Link 1</a></li>
                                 <li><a href="#!">Link 2</a></li>
@@ -36,7 +36,7 @@ export class FooterPage extends React.Component {
                         </Col>
                         <hr className="clearfix w-100 d-md-none" />
                         <Col md="2">
-                            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">Links</h5>
+                            <h5 className="text-uppercase mb-4 mt-3 font-weight-bold">이용안내</h5>
                             <ul className="list-unstyled">
                                 <li><a href="#!">Link 1</a></li>
                                 <li><a href="#!">Link 2</a></li>
@@ -52,7 +52,7 @@ export class FooterPage extends React.Component {
                         <li className="list-inline-item">
                             <h5 className="mb-1">Register for free</h5>
                         </li>
-                        <li className="list-inline-item"><a href="#" className="btn btn-danger btn-rounded">Sign up!</a></li>
+                        <li className="list-inline-item"><a href="/register" className="btn btn-danger btn-rounded">Sign up!</a></li>
                     </ul>
                 </div>
                 <hr />

@@ -35,11 +35,11 @@ const Modal = (props) => {
                     <footer>
 
 
-                        <button className="close" onClick={close}>
+                        {/* <button className="close" onClick={close}>
 
                             {' '}
                             close{' '}
-                        </button>
+                        </button> */}
                         <div class="item3">
                             <LikeButton />
                         </div>

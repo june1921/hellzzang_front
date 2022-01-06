@@ -12,11 +12,14 @@ class LikeButton extends React.Component {
         this.state.isChecked ?
             this.setState({
                 isChecked: false,
+               
                 notice: '',
+               
             })
             :
             this.setState({
                 isChecked: true,
+                notice: '좋아요 1회',
             });
     }
     render() {
@@ -26,6 +29,9 @@ class LikeButton extends React.Component {
                     {this.state.isChecked ?
                         <HeartFilled className="button red" onClick={this.onClick} /> :
                         <HeartOutlined className="button" onClick={this.onClick} />}
+
+                <h9>{this.state.notice}</h9>
+                        
                 </div>
             </React.Fragment>
         )

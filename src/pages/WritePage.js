@@ -20,10 +20,7 @@ import { FormControl } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
-import Responsive from '../components/common/Responsive';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
-import TagBox from '../components/write/TagBox';
 
 
 const WritePage = () => {
@@ -72,7 +69,6 @@ const WritePage = () => {
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Control type="file" />
         </Form.Group>
-
         <TagBoxContainer /> 
 
         <div>
