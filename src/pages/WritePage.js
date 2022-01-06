@@ -29,15 +29,16 @@ const WritePage = () => {
       e.preventDefault();
       const formData = new FormData();
       // let m_id = window.sessionStorage.getItem('m_id');
-      let m_id = 7;
+      let mission_id = 1;
       let daily_name = e.target['0'].value
       let daily_content = e.target['1'].value
       let like_count = 0;
 
-      formData.append("m_id", m_id);
+      formData.append("mission_id", mission_id);
       formData.append("daily_name", daily_name);
       formData.append("daily_content", daily_content);
       formData.append("like_count", like_count);
+      formData.append("u_id", sessionStorage.getItem("u_id"));
 
       axios({
         url: 'http://localhost:8080/write',

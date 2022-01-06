@@ -16,24 +16,17 @@ import FooterPage from "./FooterPage";
 import PrivateRouter from "./modules/PrivateRouter";
 import image from "./images.jpg";
 import axios from 'axios';
-
-
-
+import { HeatMapOutlined } from "@ant-design/icons";
 
 function App() {
 
   const [isLogin, setIsLogin] = useState(false)
-  const [nickname] = useState(0)
 
-  const [head, setHead] = useState([]);
   const backTotheLogin = () => <Navigate to="/login" />;
 
-  let [title] = useState([]);
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
   let [sessionid, setsessionid] = useState([]);
-
-
 
   useEffect(() => {
     if (sessionStorage.getItem('userid') === null) {
@@ -56,14 +49,6 @@ function App() {
         console.log(window.sessionStorage.getItem("userid"));
       });
     }
-  }, []);
-
-  useEffect(() => {
-    axios({
-      url: 'http://localhost:8080/dailycard/1',
-      method: 'get',
-    }).then(res => { setHead(res.data['0'].daily_name); })
-    console.log(head);
   }, []);
 
   return (
@@ -90,9 +75,9 @@ function App() {
                 let now = new Date();
                 const diday = Math.ceil((last - now) / 1000 / 60 / 60 / 24);
                 window.sessionStorage.setItem("diday", diday);
-                }}> 
+              }}>
 
-                
+
                 <button type="submit">Day가져오기</button>
               </form>
               <h2>D{window.sessionStorage.getItem("diday")}</h2>
@@ -114,7 +99,7 @@ function App() {
                   window.sessionStorage.removeItem('nickname')
                 }}>로그아웃</a></div>
               }
-              
+
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
@@ -130,64 +115,62 @@ function App() {
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
 
-
       <BrowserRouter>
         <Routes>
           <Route element={< TabContent pushTab={pushTab} />} path='/' />
           <Route element={<LoginPage />} path="/login" />
           <Route element={<RegisterPage />} path="/register" />
-          <Route element={<WritePage />} path="/write" />
+          <Route element={<PrivateRouter><WritePage /></PrivateRouter>} path="/write" />
           <Route element={<PostPage />} path="/:username/:postId" />
           <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage" />
         </Routes>
       </BrowserRouter>
       <FooterPage />
     </div>
-
-
   );
 }
 
-
-
-
-
-
-
-
 function TabContent(props) {
 
-    const [list, setList] = useState([]);
-    useEffect(() => {
-      axios({
-        url: 'http://localhost:8080/dailycard/list',
-        method: 'get'
-      }).then((res) => {
-        setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
-        console.log(list);
-      });
-    }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
-  
-
-
+  const [list, setList] = useState([]);
+  const [head, setHead] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:8080/dailycard/list',
+      method: 'get'
+    }).then((res) => {
+      setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
+    });
+  }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
+
+  const openModal = () => { //모달 오픈
     setModalOpen(true);
   };
-  const closeModal = () => {
+
+  const closeModal = () => { //모달 클로즈
     setModalOpen(false);
   };
 
-  if (props.pushTab === 0) {
+  if (props.pushTab === 0) { // 첫번째 탭, 메인 탭
     return <Row xs={1} md={4} className="g-4">
+      <React.Fragment> {/* 모달 오픈, 클로즈, 내용물data 전달 */}
+        <Modal open={modalOpen} close={closeModal} head={head}>
+        </Modal>
+      </React.Fragment>
       {list.map((v) => (
         <Col>
-          <React.Fragment>
-            <Modal open={modalOpen} close={closeModal} title>
-            </Modal>
-          </React.Fragment>
-          <a onClick={openModal}>
+          <a onClick={() => { //온클릭할때, 
+            console.log(v.d_id);
+            setHead(list.filter((value) => {
+              if (v.d_id === value.d_id) {
+                console.log(value);
+                return true;
+              }
+            })[0]);
+            openModal();
+          }}>
             <Card>
               <Card.Img variant="top" src={image} />
               <Card.Body>
@@ -200,9 +183,9 @@ function TabContent(props) {
       ))}
     </Row>
 
-  } else if (props.pushTab === 1) {
+  } else if (props.pushTab === 1) { //두번째 탭 
     return <h1>명예의 전당 들어갈곳</h1>
-  } else if (props.pushTab === 2) {
+  } else if (props.pushTab === 2) { //세번째 탭
     return <Row xs={1} md={2} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
 
@@ -228,7 +211,5 @@ function TabContent(props) {
     </Row>
   }
 }
-
-
 
 export default App;

@@ -2,15 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import "./ModalDesign.css";
 import LikeButton from './LikeButton';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 const Modal = (props) => {
 
-    
-
     // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-    const { open, close, header } = props;
-
-   
+    const { open, close, head } = props;
 
     return (
         // 모달이 열릴때 openModal 클래스가 생성된다.
@@ -19,7 +16,8 @@ const Modal = (props) => {
                 <section>
                     <header>
                         
-                        {header}
+                        {head.daily_name}
+                        {console.log(head)}
                         
                         <button className="close" onClick={close}>
                             {' '}
@@ -30,8 +28,8 @@ const Modal = (props) => {
                         <div class="modal-body">
                             <div class="grid-container">
     
-                                <div class="item1">MainContent</div>
-                                <div class="item2">ToDoList</div>
+                                <div class="item1">사진이 들어 갈곳</div>
+                                <div class="item2">{head.daily_content}</div>
 
 
                             </div>
@@ -40,14 +38,13 @@ const Modal = (props) => {
                     </main>
                     <footer>
 
-
                         {/* <button className="close" onClick={close}>
 
                             {' '}
                             close{' '}
                         </button> */}
                         <div class="item3">
-                            <LikeButton />
+                            <LikeButton/>
                         </div>
                     </footer>
                 </section>
