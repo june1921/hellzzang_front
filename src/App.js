@@ -102,7 +102,7 @@ function App() {
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
             
-              <div className="dDayText">D - {window.sessionStorage.getItem("diday")}</div>
+              <div className="dDayText">D {window.sessionStorage.getItem("diday")}</div>
             </Navbar.Text>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end2">
@@ -112,14 +112,12 @@ function App() {
                 <a href="/mypage"><div className="smallText">🔒 마이페이지</div></a>
 
                 <div className="smallText">
-                  {(window.sessionStorage.getItem("nickname") === null) ? 
-                  <div>
-                    <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a>
-                  </div>
-                  : 
-                  <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
+                  {(window.sessionStorage.getItem("nickname") === null) 
+                  ? <div><br/><a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
+                  : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
 
-                {(window.sessionStorage.getItem("nickname") === null) ? ""
+                  {(window.sessionStorage.getItem("nickname") === null) 
+                  ? ""
                   : <div className="smallText"><a href="/" onClick={() => {
                     alert('로그아웃 되었습니다.')
                     window.sessionStorage.removeItem('userid')

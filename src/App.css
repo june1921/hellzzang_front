@@ -57,10 +57,8 @@ h6{
 .col{
   padding: 1px;
 }
-.nav-link.active{
-  background-color: cyan;
-}
-.App-logo {
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -122,26 +120,6 @@ h6{
   color: white !important;
 }
 
-/* .HeaderBackgroundImg{
-  background-color: red;
-  background-image:url(../../../minipjclone/project_3jo/src/components/img/naked-geb94f0527_1280.jpg)
-  /* img {
-    opacity: 0.4;
-    filter: alpha(opacity=40); For IE8 and earlier
-} */
-
-
-/* .App-header {
-  background-color: #ffffff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(255, 251, 251);
-} */
-
 .App-link {
   color: #61dafb;
 }
@@ -186,10 +164,3 @@ h6{
 .page-footer{
   background-color: #DCDCDC;
 }
-
-/* h10 {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 20px;
-  color: white;
-  padding-top: 10rem;
-} */
