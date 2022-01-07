@@ -46,6 +46,14 @@ const Modal = (props) => {
                         <div class="item3">
                             <LikeButton/>
                         </div>
+                        <div>
+                            <a href='#' onClick={() => {
+                                axios({
+                                    url: "http://localhost:8080/dailycard/delete/" + head.d_id,
+                                    method: 'get',
+                                  }).then((res) => { })
+                            }}>삭제</a>
+                        </div>
                     </footer>
                 </section>
             ) : null}
