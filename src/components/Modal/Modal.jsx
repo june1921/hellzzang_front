@@ -3,6 +3,7 @@ import "./ModalDesign.css";
 import LikeButton from './LikeButton';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { Route, Navigate } from 'react-router-dom';
 
 const Modal = (props) => {
 
@@ -16,7 +17,7 @@ const Modal = (props) => {
                 <section>
                     <header>
                         
-                        {head.daily_name}
+                        {head.dailyName}
                         {console.log(head)}
                         
                         <button className="close" onClick={close}>
@@ -29,7 +30,7 @@ const Modal = (props) => {
                             <div class="grid-container">
     
                                 <div class="item1">사진이 들어 갈곳</div>
-                                <div class="item2">{head.daily_content}</div>
+                                <div class="item2">{head.dailyContent}</div>
 
 
                             </div>
@@ -47,9 +48,9 @@ const Modal = (props) => {
                             <LikeButton/>
                         </div>
                         <div>
-                            <a href='#' onClick={() => {
+                            <a href='/' onClick={() => {
                                 axios({
-                                    url: "http://localhost:8080/dailycard/delete/" + head.d_id,
+                                    url: "http://localhost:8080/dailycard/delete/" + head.did,
                                     method: 'get',
                                   }).then((res) => { })
                             }}>삭제</a>

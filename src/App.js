@@ -56,15 +56,6 @@ function App() {
       });
     }
   }, []);
-
-  useEffect(() => {
-    axios({
-      url: 'http://localhost:8080/dailycard/1',
-      method: 'get',
-    }).then(res => { setHead(res.data['0'].daily_name); })
-    console.log(head);
-  }, []);
-
  
   useEffect(()=>{
       axios({
@@ -78,8 +69,6 @@ function App() {
         window.sessionStorage.setItem("diday", diday);
       })
   }, []);
-
-  
 
   return (
     <div className="App">
@@ -164,6 +153,7 @@ function TabContent(props) {
       method: 'get'
     }).then((res) => {
       setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
+      console.log(list);
     });
   }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
 
@@ -184,9 +174,9 @@ function TabContent(props) {
       {list.map((v) => (
         <Col>
           <a onClick={() => { //온클릭할때, 
-            console.log(v.d_id);
+            console.log(v.did);
             setHead(list.filter((value) => {
-              if (v.d_id === value.d_id) {
+              if (v.did === value.did) {
                 console.log(value);
                 return true;
               }
