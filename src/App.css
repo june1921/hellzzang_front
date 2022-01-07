@@ -1,24 +1,12 @@
 .App {
   text-align: center;
-  background-color: #144D75;
+  background-color: black;
 }
 
 .navbar{
-  background-color: #144D75;
+  background-color: black;
 }
 
-h2{
-  
-  font-size: 45px;
-  text-shadow: 3px 3px 3px #ababab;
-}
-
-h1{
-  font-family: Copperplate, Papyrus, fantasy;
-  font-size: 70px;
-  color: white;
-  
-}
 
 h3{
   font-family: 'Do Hyeon', sans-serif;
@@ -41,10 +29,10 @@ h6{
   
 }
 
-h4{
-  font-family: Copperplate, Papyrus, fantasy;
-  font-size: 20px;
-  color: white;
+.mainName, .bestName {
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 26px;
+  color: red;
   
 }
 
@@ -70,7 +58,7 @@ h4{
   padding: 1px;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -79,18 +67,58 @@ h4{
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+} */
+
+.logo{
+  margin-left: -80px;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 70px;
+  /* color: white;
+  text-shadow: 3px 3px 3px #ababab; */
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #ff0000,
+    0 0 2px rgb(255, 0, 0), 0 0 2px #ff0000, 0 0 102px #ff0000, 0 0 50px #ff0000;
+  animation: flicker 0.5s infinite alternate;
+  
 }
 
-/* .App-header {
-  background-color: #ffffff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(255, 251, 251);
-} */
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #ff0000,
+      0 0 11px #ff0000,
+      0 0 19px #ff0000,
+      0 0 40px #ff0000,
+      0 0 80px #ff0000,
+      0 0 90px #ff0000,
+      0 0 100px #ff0000,
+      0 0 150px #ff0000;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
+
+.dDayText {
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 40px;
+  color: #fff;
+  
+}
+
+.smallText {
+  margin-right: -500px;
+  font-size: 20px;
+  color: white !important;
+}
+
+.smallText > div > a {
+  color: white !important;
+}
 
 .App-link {
   color: #61dafb;
@@ -125,12 +153,12 @@ h4{
 }
 
 .nav{
-  background-color: #144D75;
+  background-color: black;
   margin-bottom: 2rem ;
 }
 
 .g-4{
-  background-color: #144D75;
+  background-color: black;
 }
 
 .page-footer{

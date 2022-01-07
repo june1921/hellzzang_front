@@ -27,6 +27,8 @@ function App() {
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
   let [sessionid, setsessionid] = useState([]);
+  let [rand, setrand] = useState(1);
+  let [diday, setdiday] = useState(-0);
 
   useEffect(() => {
     if (sessionStorage.getItem('userid') === null) {
@@ -46,71 +48,91 @@ function App() {
       }).then(function (response) {
         // response Action
         window.sessionStorage.setItem("nickname", response.data['0'].nickname);
+        window.sessionStorage.setItem("u_id", response.data['0'].uid);
+        console.log(response.data['0']);
         console.log(window.sessionStorage.getItem("userid"));
+        console.log(window.sessionStorage.getItem("u_id") + "유아이디");
+        setrand(0);
       });
     }
   }, []);
 
+  useEffect(() => {
+    axios({
+      url: 'http://localhost:8080/dailycard/1',
+      method: 'get',
+    }).then(res => { setHead(res.data['0'].daily_name); })
+    console.log(head);
+  }, []);
+
+ 
+  useEffect(()=>{
+      axios({
+        url: 'http://localhost:8080/mission',
+        method: 'get',
+        params: { userid: window.sessionStorage.getItem("userid") }
+      }).then((res) => { 
+        let last = new Date(res.data['0'].last_day)
+        let now = new Date();
+        const diday = Math.ceil((now - last) / 1000 / 60 / 60 / 24);
+        window.sessionStorage.setItem("diday", diday);
+      })
+  }, []);
+
+  
+
   return (
     <div className="App">
+      <div className="HeaderBackgroundImg">
       <Navbar expand="lg">
 
         <Container>
           <Navbar.Brand href="/">
-            <h1 className="h1">HELL ZZANG</h1>
+            <div className="logo">HELL ZZANG</div>
           </Navbar.Brand>
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              {/* 가져오기버튼누르면 디데이 활성화 */}
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                axios({
-                  url: 'http://localhost:8080/mission',
-                  method: 'get',
-                  params: { userid: window.sessionStorage.getItem("userid") }
-                }).then((res) => { setsessionid(res.data); })
-                let last = new Date(sessionid['0'].last_day)
-                let now = new Date();
-                const diday = Math.ceil((last - now) / 1000 / 60 / 60 / 24);
-                window.sessionStorage.setItem("diday", diday);
-              }}>
-
-
-                <button type="submit">Day가져오기</button>
-              </form>
-              <h2>D{window.sessionStorage.getItem("diday")}</h2>
+            
+              <div className="dDayText">D {window.sessionStorage.getItem("diday")}</div>
             </Navbar.Text>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end2">
 
-            <Navbar.Text>
-              <a href="/mypage">나의페이지</a>
+              <Navbar.Text>
+            
+                <a href="/mypage"><div className="smallText">🔒 마이페이지</div></a>
 
-              {(window.sessionStorage.getItem("nickname") === null) ? <div>
-                <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
-                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
+                <div className="smallText">
+                  {(window.sessionStorage.getItem("nickname") === null) 
+                  ? <div><br/><a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
+                  : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
 
-              {(window.sessionStorage.getItem("nickname") === null) ? ""
-                : <div><a href="/" onClick={() => {
-                  alert('로그아웃 되었습니다.')
-                  window.sessionStorage.removeItem('userid')
-                  window.sessionStorage.removeItem('nickname')
-                }}>로그아웃</a></div>
-              }
+                  {(window.sessionStorage.getItem("nickname") === null) 
+                  ? ""
+                  : <div className="smallText"><a href="/" onClick={() => {
+                    alert('로그아웃 되었습니다.')
+                    window.sessionStorage.removeItem('userid')
+                    window.sessionStorage.removeItem('nickname')
+                  }}>로그아웃</a></div>
+                }</div>
+               
+              </Navbar.Text>
 
-            </Navbar.Text>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      </div>
+
 
       <Nav variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>
-          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}><h4>MAIN</h4></Nav.Link>
+          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}><div className="mainName">MAIN</div></Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}><h4>BEST</h4></Nav.Link>
+          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}><div className="bestName">BEST</div></Nav.Link>
         </Nav.Item>
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
@@ -174,8 +196,8 @@ function TabContent(props) {
             <Card>
               <Card.Img variant="top" src={image} />
               <Card.Body>
-                <Card.Title>{v.daily_name}</Card.Title>
-                <Card.Text>{v.daily_content}</Card.Text>
+                <Card.Title>{v.dailyName}</Card.Title>
+                <Card.Text>{v.dailyContent}</Card.Text>
               </Card.Body>
             </Card>
           </a>

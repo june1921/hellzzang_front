@@ -10,8 +10,9 @@ const MyPage = () => {
 
   useEffect(() => {
     axios({
-      url: 'http://localhost:8080/dailycard/list',
-      method: 'get'
+      url: 'http://localhost:8080/mydaily/list',
+      method: 'get',
+      params : {u_id : window.sessionStorage.getItem("u_id")}
     }).then((res) => {
       setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
       console.log(list);
@@ -20,7 +21,30 @@ const MyPage = () => {
 
 
   return (
-    <>
+<>
+  <InputGroup className="mb-3">
+    <InputGroup.Text id="inputGroup-sizing-default">My MISSON</InputGroup.Text>
+    <FormControl
+      aria-label="Default"
+      aria-describedby="inputGroup-sizing-default"
+    />
+      <Button variant="dark">SAVE</Button>{' '}
+  </InputGroup>
+  <br />
+  <InputGroup className="mb-3">
+    <InputGroup.Text id="inputGroup-sizing-default">D-DAY</InputGroup.Text>
+    <FormControl
+      aria-label="Default"
+      aria-describedby="inputGroup-sizing-default"
+      type="date" 
+    />
+      <Button variant="dark">SAVE</Button>{' '}
+  </InputGroup>
+
+  <Button href="/write" variant="dark">포스팅하기</Button>{' '}
+
+
+
       <Container>
         <Row xs={1} md={2} className="g-4">
           {list.map((v) => (
@@ -28,9 +52,9 @@ const MyPage = () => {
               <Card>
                 <Card.Img variant="top" src={image2} />
                 <Card.Body>
-                  <Card.Title>{v.daily_name}</Card.Title>
+                  <Card.Title>{v.dailyName}</Card.Title>
                   <Card.Text>
-                    {v.daily_content}
+                    {v.dailyContent}
                   </Card.Text>
                 </Card.Body>
               </Card>
