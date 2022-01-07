@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Link } from "react-router-dom";
+import '../../pages/Page.css';
 
 // 회원가입/로그인 페이지 레이아웃 담당 컴포넌트
 
@@ -42,7 +43,7 @@ const AuthTemplate = ({ children }) => {
         <AuthTemplateBlock>
             <WhiteBox>
                 <div className="logo-area">
-                    <Link to="/"> REACTERS </Link>
+                    <Link to="/"> 🔥 WELCOME HELL-ZZANG 🔥 </Link>
                 </div>
                 {children}
             </WhiteBox>

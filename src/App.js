@@ -90,62 +90,58 @@ function App() {
 
   return (
     <div className="App">
+      <div className="HeaderBackgroundImg">
       <Navbar expand="lg">
 
         <Container>
           <Navbar.Brand href="/">
-            <h1 className="h1">HELL ZZANG</h1>
+            <div className="logo">HELL ZZANG</div>
           </Navbar.Brand>
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-            {/* <form onSubmit={(e) => {
-                e.preventDefault();
-                axios({
-                  url: 'http://localhost:8080/mission',
-                  method: 'get',
-                  params: { userid: window.sessionStorage.getItem("userid") }
-                }).then((res) => { setsessionid(res.data); })
-                let last = new Date(sessionid['0'].last_day)
-                let now = new Date();
-                const diday = Math.ceil((last - now) / 1000 / 60 / 60 / 24);
-                window.sessionStorage.setItem("diday", diday);
-                }}> 
-                <button type="submit">Day가져오기</button>
-              </form> */}
-              <h2>D{window.sessionStorage.getItem("diday")}</h2>
-              {console.log(window.sessionStorage.getItem("diday"))}
+            
+              <div className="dDayText">D - {window.sessionStorage.getItem("diday")}</div>
             </Navbar.Text>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end2">
 
-            <Navbar.Text>
-              <a href="/mypage">나의페이지</a>
+              <Navbar.Text>
+            
+                <a href="/mypage"><div className="smallText">🔒 마이페이지</div></a>
 
-              {(window.sessionStorage.getItem("nickname") === null) ? <div>
-                <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a></div>
-                : <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
+                <div className="smallText">
+                  {(window.sessionStorage.getItem("nickname") === null) ? 
+                  <div>
+                    <a href="/login" onClick={() => { <LoginPage /> }}>로그인하세요!</a>
+                  </div>
+                  : 
+                  <div> {window.sessionStorage.getItem("nickname")}님 반갑습니다.</div>}
 
-              {(window.sessionStorage.getItem("nickname") === null) ? ""
-                : <div><a href="/" onClick={() => {
-                  alert('로그아웃 되었습니다.')
-                  window.sessionStorage.removeItem('userid')
-                  window.sessionStorage.removeItem('nickname')
-                }}>로그아웃</a></div>
-              }
-              
-            </Navbar.Text>
+                {(window.sessionStorage.getItem("nickname") === null) ? ""
+                  : <div className="smallText"><a href="/" onClick={() => {
+                    alert('로그아웃 되었습니다.')
+                    window.sessionStorage.removeItem('userid')
+                    window.sessionStorage.removeItem('nickname')
+                  }}>로그아웃</a></div>
+                }</div>
+               
+              </Navbar.Text>
+
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      </div>
+
 
       <Nav variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>
-          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}><h4>MAIN</h4></Nav.Link>
+          <Nav.Link eventKey="link-0" onClick={() => { 스위치변경(false); setPushTab(0); }}><div className="mainName">MAIN</div></Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}><h4>BEST</h4></Nav.Link>
+          <Nav.Link eventKey="link-2" onClick={() => { 스위치변경(false); setPushTab(2); }}><div className="bestName">BEST</div></Nav.Link>
         </Nav.Item>
       </Nav>
       {/* <TabContent pushTab={pushTab} /> */}
@@ -213,8 +209,6 @@ function TabContent(props) {
       ))}
     </Row>
 
-  } else if (props.pushTab === 1) {
-    return <h1>명예의 전당 들어갈곳</h1>
   } else if (props.pushTab === 2) {
     return <Row xs={1} md={2} className="g-4">
       {Array.from({ length: 6 }).map((_, idx) => (
