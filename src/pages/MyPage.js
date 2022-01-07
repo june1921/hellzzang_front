@@ -10,8 +10,9 @@ const MyPage = () => {
 
   useEffect(() => {
     axios({
-      url: 'http://localhost:8080/dailycard/list',
-      method: 'get'
+      url: 'http://localhost:8080/mydaily/list',
+      method: 'get',
+      params : {u_id : window.sessionStorage.getItem("u_id")}
     }).then((res) => {
       setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
       console.log(list);
@@ -28,9 +29,9 @@ const MyPage = () => {
               <Card>
                 <Card.Img variant="top" src={image2} />
                 <Card.Body>
-                  <Card.Title>{v.daily_name}</Card.Title>
+                  <Card.Title>{v.dailyName}</Card.Title>
                   <Card.Text>
-                    {v.daily_content}
+                    {v.dailyContent}
                   </Card.Text>
                 </Card.Body>
               </Card>

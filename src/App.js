@@ -32,6 +32,8 @@ function App() {
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
   let [sessionid, setsessionid] = useState([]);
+  let [rand, setrand] = useState(1);
+  let [diday, setdiday] = useState(-0);
 
 
 
@@ -53,7 +55,11 @@ function App() {
       }).then(function (response) {
         // response Action
         window.sessionStorage.setItem("nickname", response.data['0'].nickname);
+        window.sessionStorage.setItem("u_id", response.data['0'].uid);
+        console.log(response.data['0']);
         console.log(window.sessionStorage.getItem("userid"));
+        console.log(window.sessionStorage.getItem("u_id") + "유아이디");
+        setrand(0);
       });
     }
   }, []);
@@ -65,6 +71,22 @@ function App() {
     }).then(res => { setHead(res.data['0'].daily_name); })
     console.log(head);
   }, []);
+
+ 
+  useEffect(()=>{
+      axios({
+        url: 'http://localhost:8080/mission',
+        method: 'get',
+        params: { userid: window.sessionStorage.getItem("userid") }
+      }).then((res) => { 
+        let last = new Date(res.data['0'].last_day)
+        let now = new Date();
+        const diday = Math.ceil((now - last) / 1000 / 60 / 60 / 24);
+        window.sessionStorage.setItem("diday", diday);
+      })
+  }, []);
+
+  
 
   return (
     <div className="App">
@@ -78,8 +100,7 @@ function App() {
 
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              {/* 가져오기버튼누르면 디데이 활성화 */}
-              <form onSubmit={(e) => {
+            {/* <form onSubmit={(e) => {
                 e.preventDefault();
                 axios({
                   url: 'http://localhost:8080/mission',
@@ -91,11 +112,10 @@ function App() {
                 const diday = Math.ceil((last - now) / 1000 / 60 / 60 / 24);
                 window.sessionStorage.setItem("diday", diday);
                 }}> 
-
-                
                 <button type="submit">Day가져오기</button>
-              </form>
+              </form> */}
               <h2>D{window.sessionStorage.getItem("diday")}</h2>
+              {console.log(window.sessionStorage.getItem("diday"))}
             </Navbar.Text>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end2">
@@ -136,7 +156,7 @@ function App() {
           <Route element={< TabContent pushTab={pushTab} />} path='/' />
           <Route element={<LoginPage />} path="/login" />
           <Route element={<RegisterPage />} path="/register" />
-          <Route element={<WritePage />} path="/write" />
+          <Route element={<PrivateRouter><WritePage /></PrivateRouter>} path="/write" />
           <Route element={<PostPage />} path="/:username/:postId" />
           <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage" />
         </Routes>
@@ -149,12 +169,6 @@ function App() {
 }
 
 
-
-
-
-
-
-
 function TabContent(props) {
 
     const [list, setList] = useState([]);
@@ -164,7 +178,6 @@ function TabContent(props) {
         method: 'get'
       }).then((res) => {
         setList(res.data); //스테이트건드리면 랜더링(유즈이펙트 없으면 계속돎) 
-        console.log(list);
       });
     }, []); //deps(대괄호)를 빈칸이면  useEffect 한번만 동작됨.
   
@@ -191,8 +204,8 @@ function TabContent(props) {
             <Card>
               <Card.Img variant="top" src={image} />
               <Card.Body>
-                <Card.Title>{v.daily_name}</Card.Title>
-                <Card.Text>{v.daily_content}</Card.Text>
+                <Card.Title>{v.dailyName}</Card.Title>
+                <Card.Text>{v.dailyContent}</Card.Text>
               </Card.Body>
             </Card>
           </a>
