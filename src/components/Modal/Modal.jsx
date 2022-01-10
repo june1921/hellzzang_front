@@ -16,10 +16,10 @@ const Modal = (props) => {
             {open ? (
                 <section>
                     <header>
-                        
+
                         {head.dailyName}
                         {console.log(head)}
-                        
+
                         <button className="close" onClick={close}>
                             {' '}
                             &times;{' '}
@@ -28,7 +28,7 @@ const Modal = (props) => {
                     <main>
                         <div class="modal-body">
                             <div class="grid-container">
-    
+
                                 <div class="item1">사진이 들어 갈곳</div>
                                 <div class="item2">{head.dailyContent}</div>
 
@@ -45,14 +45,28 @@ const Modal = (props) => {
                             close{' '}
                         </button> */}
                         <div class="item3">
-                            <LikeButton/>
+                            <a href='#' onClick={() => {
+                                axios({
+                                    url: "http://localhost:8080/dailycard/likebtn/get/" + head.did,
+                                    method: 'get',
+                                }).then(() => {
+
+                                });
+
+                                axios({
+                                    url: "http://localhost:8080/dailycard/likebtn/" + head.did,
+                                    method: 'post',
+                                }).then((res) => { console.log(res.dId) })
+
+                            }}><LikeButton /></a>
+
                         </div>
                         <div>
                             <a href='/' onClick={() => {
                                 axios({
                                     url: "http://localhost:8080/dailycard/delete/" + head.did,
                                     method: 'get',
-                                  }).then((res) => { })
+                                }).then((res) => { })
                             }}>삭제</a>
                         </div>
                     </footer>

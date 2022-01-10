@@ -38,7 +38,7 @@ h6{
 
 
 .card{
-  width:15rem;
+  width:25rem; 
   margin-top: 4rem;
   margin-bottom: 2rem;
   margin-left: 3rem;
@@ -105,8 +105,9 @@ h6{
 
 .dDayText {
   font-family: 'Do Hyeon', sans-serif;
-  font-size: 40px;
+  font-size: 60px;
   color: #fff;
+  text-align: center;
   
 }
 

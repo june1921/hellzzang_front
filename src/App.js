@@ -14,11 +14,14 @@ import Modal from "./components/Modal/Modal";
 import FooterPage from "./FooterPage";
 
 import PrivateRouter from "./modules/PrivateRouter";
-import image from "./images.jpg";
+import image1 from "./image1.jpg";
+import image2 from "./image2.jpg";
 import axios from 'axios';
 import { HeatMapOutlined } from "@ant-design/icons";
 
+
 function App() {
+  
 
   const [isLogin, setIsLogin] = useState(false)
 
@@ -142,10 +145,13 @@ function App() {
 }
 
 function TabContent(props) {
-
+  
   const [list, setList] = useState([]);
   const [head, setHead] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+
+  let i = 1;
+  
 
   useEffect(() => {
     axios({
@@ -165,6 +171,7 @@ function TabContent(props) {
     setModalOpen(false);
   };
 
+  
   if (props.pushTab === 0) { // 첫번째 탭, 메인 탭
     return <Row xs={1} md={4} className="g-4">
       <React.Fragment> {/* 모달 오픈, 클로즈, 내용물data 전달 */}
@@ -184,7 +191,7 @@ function TabContent(props) {
             openModal();
           }}>
             <Card>
-              <Card.Img variant="top" src={image} />
+              <Card.Img variant="top" src={image1} />
               <Card.Body>
                 <Card.Title>{v.dailyName}</Card.Title>
                 <Card.Text>{v.dailyContent}</Card.Text>
@@ -193,6 +200,7 @@ function TabContent(props) {
           </a>
         </Col>
       ))}
+     
     </Row>
 
   } else if (props.pushTab === 1) { //두번째 탭 
@@ -206,7 +214,7 @@ function TabContent(props) {
 
             <Card.Header>
               <Nav variant="pills" defaultActiveKey="#first">
-                <Button variant="info">프로필 들어가기</Button>{' '}
+              
               </Nav>
             </Card.Header>
 

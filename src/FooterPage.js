@@ -53,7 +53,7 @@ export class FooterPage extends React.Component {
                 <div className="text-center py-3">
                     <ul className="list-unstyled list-inline mb-0">
                         <li className="list-inline-item">
-                            <h5 className="mb-1">Register for free</h5>
+                            <h5 className="mb-1">먹는 것, 운동 루틴 기록까지 운동이지 ! </h5>
                         </li>
                         <li className="list-inline-item"><a href="/register" className="btn btn-danger btn-rounded">Sign up!</a></li>
                     </ul>

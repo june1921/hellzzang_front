@@ -45,7 +45,9 @@ a {
 
 const ButtonWidthMarginTop = styled(Button)`
 margin-top: 1rem
-`;
+color: ${(props) => props.color || "black"};
+background: ${(props) => props.background || "black"};
+`
 
 const textMap = {
     login: '로그인',
@@ -152,7 +154,7 @@ const AuthForm = ({ type }) => {
 
                 )}
 
-                <ButtonWidthMarginTop cyan fullWidth>
+                <ButtonWidthMarginTop  fullWidth>
                     {text}
                 </ButtonWidthMarginTop>
             </form>
