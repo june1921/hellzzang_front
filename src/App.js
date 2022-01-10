@@ -21,7 +21,6 @@ import { HeatMapOutlined } from "@ant-design/icons";
 
 
 function App() {
-  //커밋
 
   const [isLogin, setIsLogin] = useState(false)
 
