@@ -14,17 +14,17 @@ const WritePage = () => {
     <><form onSubmit={(e)=>{
       e.preventDefault();
       const formData = new FormData();
-      let daily_name = e.target['0'].value
-      let daily_content = e.target['1'].value
-      let like_count = 0;
+      let dailyName = e.target['0'].value
+      let dailyContent = e.target['1'].value
+      let likeCount = 0;
 
       console.log(e.target['0'].value);
       console.log(e.target['1'].value);
       
-      formData.append("dailyName", daily_name);
-      formData.append("dailyContent", daily_content);
-      formData.append("likeCount", like_count);
-      formData.append("userNum", window.sessionStorage.getItem("u_id"))
+      formData.append("dailyName", dailyName);
+      formData.append("dailyContent", dailyContent);
+      formData.append("likeCount", likeCount);
+      formData.append("userNum", window.sessionStorage.getItem("userNum"))
 
       axios({
         url: 'http://localhost:8080/write',
@@ -49,7 +49,7 @@ const WritePage = () => {
           />
         </FloatingLabel>
         <br/> 
-        <Form.Group controlId="formFile" className="mb-3"><Form.Control type="file" /></Form.Group>
+        <Form.Group controlId="formFile" czsName="mb-3"><Form.Control type="file" /></Form.Group>
         <TagBoxContainer /> 
         <div>
           <Button type = "submit" variant="primary" size="lg" active 

@@ -1,6 +1,6 @@
 import { Button, Card, Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Modal from "../components/Modal/Modal";
+import Modal from "../components/modals/Modal";
 import React, { useEffect, useState } from "react";
 import image2 from "./다이어트.jpg";
 import axios from "axios";
@@ -67,9 +67,9 @@ const MyPage = () => {
               <Card>
                 <Card.Img variant="top" src={image2} />
                 <Card.Body>
-                  <Card.Title>{v.daily_name}</Card.Title>
+                  <Card.Title>{v.dailyName}</Card.Title>
                   <Card.Text>
-                    {v.daily_content}
+                    {v.dailyContent}
                   </Card.Text>
                 </Card.Body>
               </Card>

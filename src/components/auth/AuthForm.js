@@ -71,15 +71,15 @@ const AuthForm = ({ type }) => {
                 const formData = new FormData();
                 const name = e.target['0'].value;
                 const nickname = e.target['1'].value;
-                const userid = e.target['2'].value;
-                const userpw = e.target['3'].value;
+                const userId = e.target['2'].value;
+                const userPw = e.target['3'].value;
 
                 formData.append("name", name);
                 formData.append("nickname", nickname);
-                formData.append("userid", userid);
-                formData.append("userpw", userpw);
+                formData.append("userId", userId);
+                formData.append("userPw", userPw);
 
-                console.log(name, nickname, userid, userpw);
+                console.log(name, nickname, userId, userPw);
                 axios({
                   url: 'http://localhost:8080/user/signup',
                   method: 'post',
@@ -89,10 +89,10 @@ const AuthForm = ({ type }) => {
                 });
               }else if(type ==='login'){
                 const formData = new FormData();
-                const userid = e.target['0'].value;
-                const userpw = e.target['1'].value;
-                formData.append("userid", userid);
-                formData.append("userpw", userpw);
+                const userId = e.target['0'].value;
+                const userPw = e.target['1'].value;
+                formData.append("userId", userId);
+                formData.append("userPw", userPw);
                 axios({
                   url: 'http://localhost:8080/user/login',
                   method: 'post',
@@ -101,7 +101,7 @@ const AuthForm = ({ type }) => {
                   if (res.data.code === 200) {
                     alert('로그인 되었습니다.');
                     //JWT와 같은 토큰값을 저장
-                    sessionStorage.setItem("userid", userid);
+                    sessionStorage.setItem("userId", userId);
                     window.location = '/';
                   } else {
                     alert('가입 정보를 확인해 주세요');
@@ -116,7 +116,7 @@ const AuthForm = ({ type }) => {
                         placeholder="이름"
                         type="text" />
                       <StyledInput
-                        autoComplete="userNickname"
+                        autoComplete="usernickname"
                         name="nickname"
                         placeholder="닉네임"
                         type="text" />
@@ -125,11 +125,11 @@ const AuthForm = ({ type }) => {
 
                 <StyledInput
                     autoComplete="userId"
-                    name="userid"
+                    name="userId"
                     placeholder="아이디" />
                 <StyledInput
                     autoComplete="new-password"
-                    name="userpw"
+                    name="userPw"
                     placeholder="비밀번호"
                     type="password" />
 

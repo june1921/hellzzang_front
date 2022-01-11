@@ -10,7 +10,7 @@ import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
 import MyPage from './pages/MyPage';
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
-import Modal from "./components/Modal/Modal";
+import Modal from "./components/modals/Modal";
 import FooterPage from "./FooterPage";
 
 import PrivateRouter from "./modules/PrivateRouter";
@@ -26,7 +26,6 @@ function App() {
   
   const [isLogin, setIsLogin] = useState(false)
 
-  const backTotheLogin = () => <Navigate to="/login" />;
 
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
@@ -35,27 +34,27 @@ function App() {
   let [diday, setdiday] = useState(-0);
 
   useEffect(() => {
-    if (sessionStorage.getItem('userid') === null) {
-      // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 없다면
+    if (sessionStorage.getItem('userId') === null) {
+      // sessionStorage 에 userId 라는 key 값으로 저장된 값이 없다면
       console.log('isLogin ?? :: ', isLogin)
-      console.log(window.sessionStorage.getItem("userid"));
+      console.log(window.sessionStorage.getItem("userId"));
     }
     else {
-      // sessionStorage 에 user_id 라는 key 값으로 저장된 값이 있다면
+      // sessionStorage 에 userId 라는 key 값으로 저장된 값이 있다면
       // 로그인 상태 변경
       setIsLogin(true)
       console.log('isLogin ?? :: ', isLogin)
       axios({
         method: "get",
         url: "http://localhost:8080/user/output",
-        params: { userid: window.sessionStorage.getItem("userid") },
-      }).then(function (response) {
+        params: { userId: window.sessionStorage.getItem("userId") },
+      }).then((response)=> {
         // response Action
         window.sessionStorage.setItem("nickname", response.data['0'].nickname);
-        window.sessionStorage.setItem("u_id", response.data['0'].uid);
+        window.sessionStorage.setItem("userNum", response.data['0'].uid);
         console.log(response.data['0']);
-        console.log(window.sessionStorage.getItem("userid"));
-        console.log(window.sessionStorage.getItem("u_id") + "유아이디");
+        console.log(window.sessionStorage.getItem("userId"));
+        console.log(window.sessionStorage.getItem("uId") + "유아이디");
         setrand(0);
       });
     }
@@ -65,9 +64,9 @@ function App() {
       axios({
         url: 'http://localhost:8080/mission',
         method: 'get',
-        params: { userid: window.sessionStorage.getItem("userid") }
+        params: { userId: window.sessionStorage.getItem("userId") }
       }).then((res) => { 
-        let last = new Date(res.data['0'].last_day)
+        let last = new Date(res.data['0'].lastday)
         let now = new Date();
         const diday = Math.ceil((now - last) / 1000 / 60 / 60 / 24);
         window.sessionStorage.setItem("diday", diday);
@@ -106,7 +105,7 @@ function App() {
                   ? ""
                   : <div className="smallText"><a href="/" onClick={() => {
                     alert('로그아웃 되었습니다.')
-                    window.sessionStorage.removeItem('userid')
+                    window.sessionStorage.removeItem('userId')
                     window.sessionStorage.removeItem('nickname')
                   }}>로그아웃</a></div>
                 }</div>
@@ -136,7 +135,7 @@ function App() {
           <Route element={<LoginPage />} path="/login" />
           <Route element={<RegisterPage />} path="/register" />
           <Route element={<PrivateRouter><WritePage /></PrivateRouter>} path="/write" />
-          <Route element={<PostPage />} path="/:username/:postId" />
+          <Route element={<PostPage />} path="/:userName/:postId" />
           <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage" />
         </Routes>
       </BrowserRouter>
@@ -182,9 +181,9 @@ function TabContent(props) {
       {list.map((v) => (
         <Col>
           <a onClick={() => { //온클릭할때, 
-            console.log(v.did);
+            console.log(v.dId);
             setHead(list.filter((value) => {
-              if (v.did === value.did) {
+              if (v.dId === value.dId) {
                 console.log(value);
                 return true;
               }
