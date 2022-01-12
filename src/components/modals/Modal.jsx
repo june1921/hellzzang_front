@@ -32,7 +32,6 @@ const Modal = (props) => {
                                 <div class="item1">사진이 들어 갈곳</div>
                                 <div class="item2">{head.dailyContent}</div>
 
-
                             </div>
                         </div>
                         {props.children}
@@ -47,16 +46,15 @@ const Modal = (props) => {
                         <div class="item3">
                             <a href='#' onClick={() => {
                                 axios({
-                                    url: "http://localhost:8080/dailycard/likebtn/get/" + head.did,
+                                    url: "http://localhost:8080/dailycard/likebtn/" + head.did,
                                     method: 'get',
-                                }).then(() => {
-
-                                });
-
+                                }).then(() => { });
+                                /*
                                 axios({
                                     url: "http://localhost:8080/dailycard/likebtn/" + head.did,
                                     method: 'post',
                                 }).then((res) => { console.log(res.dId) })
+                                */
 
                             }}><LikeButton /></a>
 

@@ -20,12 +20,10 @@ import axios from 'axios';
 import { HeatMapOutlined } from "@ant-design/icons";
 
 
-function App() {
 
-  //커밋2
+function App() {
   
   const [isLogin, setIsLogin] = useState(false)
-
 
   let [pushTab, setPushTab] = useState(0);
   let [스위치, 스위치변경] = useState(false);
@@ -54,7 +52,7 @@ function App() {
         window.sessionStorage.setItem("userNum", response.data['0'].uid);
         console.log(response.data['0']);
         console.log(window.sessionStorage.getItem("userId"));
-        console.log(window.sessionStorage.getItem("uId") + "유아이디");
+        console.log(window.sessionStorage.getItem("uId") + "uId");
         setrand(0);
       });
     }
