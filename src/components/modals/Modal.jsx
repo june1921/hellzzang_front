@@ -19,18 +19,18 @@ const Modal = (props) => {
 
                         {head.dailyName}
                         {console.log(head)}
-
+                        {console.log(head.did)}
                         <button className="close" onClick={close}>
                             {' '}
                             &times;{' '}
                         </button>
                     </header>
                     <main>
-                        <div class="modal-body">
-                            <div class="grid-container">
+                        <div className="modal-body">
+                            <div className="grid-container">
 
-                                <div class="item1">사진이 들어 갈곳</div>
-                                <div class="item2">{head.dailyContent}</div>
+                                <div className="item1">사진이 들어 갈곳</div>
+                                <div className="item2">{head.dailyContent}</div>
 
                             </div>
                         </div>
@@ -43,7 +43,7 @@ const Modal = (props) => {
                             {' '}
                             close{' '}
                         </button> */}
-                        <div class="item3">
+                        <div className="item3">
                             <a href='#' onClick={() => {
                                 axios({
                                     url: "http://localhost:8080/dailycard/likebtn/" + head.did,
@@ -66,6 +66,14 @@ const Modal = (props) => {
                                     method: 'get',
                                 }).then((res) => { })
                             }}>삭제</a>
+                        </div>
+                        <div>
+                        <a href='/update' onClick={() => {
+                                axios({
+                                    url: "http://localhost:8080/dailycard/update/" + head.did,
+                                    method: 'get',
+                                }).then((res) => { })
+                            }}>업데이트</a>
                         </div>
                     </footer>
                 </section>

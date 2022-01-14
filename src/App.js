@@ -52,7 +52,7 @@ function App() {
         window.sessionStorage.setItem("userNum", response.data['0'].uid);
         console.log(response.data['0']);
         console.log(window.sessionStorage.getItem("userId"));
-        console.log(window.sessionStorage.getItem("uId") + "uId");
+        console.log(window.sessionStorage.getItem("userNum") + "uid");
         setrand(0);
       });
     }
@@ -179,9 +179,9 @@ function TabContent(props) {
       {list.map((v) => (
         <Col>
           <a onClick={() => { //온클릭할때, 
-            console.log(v.dId);
+            console.log(v.did);
             setHead(list.filter((value) => {
-              if (v.dId === value.dId) {
+              if (v.did === value.did) {
                 console.log(value);
                 return true;
               }
