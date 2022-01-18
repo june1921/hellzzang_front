@@ -150,7 +150,6 @@ function TabContent(props) {
 
   let i = 1;
   
-
   useEffect(() => {
     axios({
       url: 'http://localhost:8080/dailycard/list',

@@ -70,10 +70,16 @@ const Modal = (props) => {
                         <div>
                         <a href='/update' onClick={() => {
                                 axios({
-                                    url: "http://localhost:8080/dailycard/update/" + head.did,
+                                    url: "http://localhost:8080/dailycard/update/" + head.did, //선택한 게시물의 Dailycard 연번
                                     method: 'get',
-                                }).then((res) => { })
-                            }}>업데이트</a>
+                                }).then((res) => {
+                                    window.sessionStorage.setItem("dId", head.did);
+                                    window.sessionStorage.setItem("dailyName", head.dailyName);
+                                    window.sessionStorage.setItem("dailyContent", head.dailyContent);
+                                    window.sessionStorage.setItem("likeCount", head.likeCount);
+                                    window.sessionStorage.setItem("userNum", window.sessionStorage.getItem("userNum"));
+                                })
+                            }}>수정</a>
                         </div>
                     </footer>
                 </section>
