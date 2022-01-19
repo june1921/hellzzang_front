@@ -64,20 +64,21 @@ const Modal = (props) => {
                                 axios({
                                     url: "http://localhost:8080/dailycard/delete/" + head.did,
                                     method: 'get',
-                                }).then((res) => { })
+                                }).then(() => { })
                             }}>삭제</a>
                         </div>
                         <div>
-                        <a href='/update' onClick={() => {
+                        <a href='#' onClick={() => {
                                 axios({
                                     url: "http://localhost:8080/dailycard/update/" + head.did, //선택한 게시물의 Dailycard 연번
                                     method: 'get',
-                                }).then((res) => {
+                                }).then(() => {
                                     window.sessionStorage.setItem("dId", head.did);
                                     window.sessionStorage.setItem("dailyName", head.dailyName);
                                     window.sessionStorage.setItem("dailyContent", head.dailyContent);
                                     window.sessionStorage.setItem("likeCount", head.likeCount);
                                     window.sessionStorage.setItem("userNum", window.sessionStorage.getItem("userNum"));
+                                    window.location = 'dailycard/update/' + head.did;
                                 })
                             }}>수정</a>
                         </div>

@@ -18,6 +18,7 @@ import image1 from "./image1.jpg";
 import image2 from "./image2.jpg";
 import axios from 'axios';
 import { HeatMapOutlined } from "@ant-design/icons";
+import UpdatePage from "./pages/UpdatePage";
 
 
 
@@ -135,6 +136,7 @@ function App() {
           <Route element={<PrivateRouter><WritePage /></PrivateRouter>} path="/write" />
           <Route element={<PostPage />} path="/:userName/:postId" />
           <Route element={<PrivateRouter><MyPage /></PrivateRouter>} path="/mypage" />
+          <Route element={<UpdatePage/>} path="dailycard/update/:did" />
         </Routes>
       </BrowserRouter>
       <FooterPage />

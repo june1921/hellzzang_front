@@ -5,20 +5,8 @@ import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
-import { useState } from 'react';
-
 
 const UpdatePage = () => {
-  componentDidMount() {
-    // 외부 라이브러리 연동: D3, masonry, etc
-    // 컴포넌트에서 필요한 데이터 요청: Ajax, GraphQL, etc
-    // DOM 에 관련된 작업: 스크롤 설정, 크기 읽어오기 등
-    axios({
-      url: 'http://localhost:8080/write' + window.sessionStorage.getItem("dId"),
-      method:'',
-    
-    })
-  }
 
   return (
     <><form onSubmit={(e)=>{
@@ -37,7 +25,7 @@ const UpdatePage = () => {
       formData.append("userNum", window.sessionStorage.getItem("userNum"))
 
       axios({
-        url: 'http://localhost:8080/update' + window.sessionStorage.getItem("dId"),
+        url: 'http://localhost:8080/dailycard/update/' + window.sessionStorage.getItem("dId"),
         method: 'post',
         data: formData
       }).then((res) => {
@@ -47,16 +35,19 @@ const UpdatePage = () => {
         <br/>
         <InputGroup size="lg">
           <InputGroup.Text id="inputGroup-sizing-lg">Title</InputGroup.Text>
-          <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" name='name'/>
+          <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" name='name' defaultValue={window.sessionStorage.getItem("dailyName")} />
         </InputGroup>
         <br/>
-        <FloatingLabel controlId="floatingTextarea2" label="Content">
+        <FloatingLabel controlId="floatingTextarea2" label="Content" >
+          
           <Form.Control
             as="textarea"
             name='name2'
             placeholder="Leave a comment here"
             style={{ height: '100px' }}
+            defaultValue={window.sessionStorage.getItem("dailyContent")}
           />
+          
         </FloatingLabel>
         <br/> 
         <Form.Group controlId="formFile" czsName="mb-3"><Form.Control type="file" /></Form.Group>
@@ -76,4 +67,4 @@ const UpdatePage = () => {
   );
 };
 
-export default WritePage;
+export default UpdatePage;
